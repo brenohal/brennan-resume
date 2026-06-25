@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { useReducedMotion } from 'framer-motion'
 
 interface Star {
   x: number
@@ -10,10 +11,11 @@ interface Star {
 
 export default function Starfield() {
   const containerRef = useRef<HTMLDivElement>(null)
+  const reduce = useReducedMotion()
 
   useEffect(() => {
     const container = containerRef.current
-    if (!container) return
+    if (!container || reduce) return
 
     const stars: Star[] = Array.from({ length: 80 }, () => ({
       x: Math.random() * 100,
@@ -39,11 +41,12 @@ export default function Starfield() {
           "></span>`
       )
       .join('')
-  }, [])
+  }, [reduce])
 
   return (
     <div
       ref={containerRef}
+      className="starfield"
       aria-hidden="true"
       style={{
         position: 'absolute',

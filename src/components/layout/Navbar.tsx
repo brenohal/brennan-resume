@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
-import { Menu, X, SquareTerminal } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Menu, X, Command } from 'lucide-react'
 import { useActiveSection } from '../../hooks/useActiveSection'
-import Terminal from '../ui/Terminal'
+import ThemeToggle from '../ui/ThemeToggle'
 import { personal } from '../../data/personal'
+import { emitUI } from '../../lib/ui-events'
 
 const NAV_ITEMS = [
   { label: 'About', id: 'about', num: '01' },
@@ -21,7 +23,6 @@ function scrollTo(id: string) {
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [termOpen, setTermOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const active = useActiveSection(['about', 'experience', 'projects', 'contact'])
 
@@ -31,12 +32,24 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handler)
   }, [])
 
-  // Close mobile menu on resize
+  // Close mobile menu on resize to desktop
   useEffect(() => {
     const handler = () => { if (window.innerWidth >= 768) setMenuOpen(false) }
     window.addEventListener('resize', handler)
     return () => window.removeEventListener('resize', handler)
   }, [])
+
+  // Lock body scroll + close on Escape while the mobile drawer is open
+  useEffect(() => {
+    if (!menuOpen) return
+    document.body.style.overflow = 'hidden'
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setMenuOpen(false) }
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [menuOpen])
 
   function handleNavClick(id: string) {
     scrollTo(id)
@@ -99,7 +112,7 @@ export default function Navbar() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }} className="hidden-mobile">
             <ol style={{ display: 'flex', gap: '2rem', listStyle: 'none' }}>
               {NAV_ITEMS.map((item) => (
-                <li key={item.id}>
+                <li key={item.id} style={{ position: 'relative' }}>
                   <button
                     onClick={() => handleNavClick(item.id)}
                     className="nav-link"
@@ -108,32 +121,50 @@ export default function Navbar() {
                       border: 'none',
                       cursor: 'pointer',
                       color: active === item.id ? 'hsl(var(--teal))' : undefined,
-                      padding: 0,
+                      padding: '0 0 0.35rem',
                     }}
                   >
                     <span className="num">{item.num}.</span>
                     {item.label}
                   </button>
+                  {active === item.id && (
+                    <motion.span
+                      layoutId="nav-indicator"
+                      style={{
+                        position: 'absolute',
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        height: '2px',
+                        background: 'hsl(var(--teal))',
+                        borderRadius: '2px',
+                      }}
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
                 </li>
               ))}
             </ol>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <ThemeToggle />
               <button
-                onClick={() => setTermOpen((v) => !v)}
-                aria-label="Toggle terminal"
+                onClick={() => emitUI('open-palette')}
+                aria-label="Open command palette"
+                title="Command palette (Ctrl/⌘ K)"
                 style={{
                   background: 'none',
                   border: 'none',
                   cursor: 'pointer',
-                  color: termOpen ? 'hsl(var(--teal))' : 'hsl(var(--slate))',
+                  color: 'hsl(var(--slate))',
                   display: 'flex',
                   transition: 'color 0.2s',
                   padding: '0.25rem',
                 }}
-                title="Toggle terminal"
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'hsl(var(--teal))' }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'hsl(var(--slate))' }}
               >
-                <SquareTerminal size={18} />
+                <Command size={18} />
               </button>
 
               <a
@@ -148,24 +179,20 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Mobile hamburger */}
+          {/* Mobile cluster */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }} className="show-mobile">
+            <ThemeToggle />
             <button
-              onClick={() => setTermOpen((v) => !v)}
-              aria-label="Toggle terminal"
-              style={{
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                color: termOpen ? 'hsl(var(--teal))' : 'hsl(var(--slate))',
-                display: 'flex',
-              }}
+              onClick={() => emitUI('open-palette')}
+              aria-label="Open command palette"
+              style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'hsl(var(--slate))', display: 'flex' }}
             >
-              <SquareTerminal size={18} />
+              <Command size={18} />
             </button>
             <button
               onClick={() => setMenuOpen((v) => !v)}
               aria-label="Toggle menu"
+              aria-expanded={menuOpen}
               style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'hsl(var(--teal))', display: 'flex' }}
             >
               {menuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -174,72 +201,64 @@ export default function Navbar() {
         </nav>
       </header>
 
-      {/* Terminal overlay */}
-      {termOpen && (
-        <div
-          style={{
-            position: 'fixed',
-            bottom: '2rem',
-            right: '2rem',
-            zIndex: 100,
-          }}
-        >
-          <Terminal onClose={() => setTermOpen(false)} onNavigate={(id) => { scrollTo(id); setTermOpen(false) }} />
-        </div>
-      )}
-
       {/* Mobile drawer */}
-      {menuOpen && (
-        <div
-          style={{
-            position: 'fixed',
-            inset: 0,
-            zIndex: 40,
-            background: 'hsl(var(--navy-light))',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '2.5rem',
-          }}
-        >
-          <ol style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem' }}>
-            {NAV_ITEMS.map((item) => (
-              <li key={item.id}>
-                <button
-                  onClick={() => handleNavClick(item.id)}
-                  style={{
-                    fontFamily: 'Fira Code, monospace',
-                    fontSize: '1.25rem',
-                    color: 'hsl(var(--slate-light))',
-                    background: 'none',
-                    border: 'none',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    gap: '0.25rem',
-                  }}
-                >
-                  <span style={{ color: 'hsl(var(--teal))', fontSize: '0.875rem' }}>{item.num}.</span>
-                  {item.label}
-                </button>
-              </li>
-            ))}
-          </ol>
-          <a
-            href={personal.resumeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-outline"
-            onClick={() => setMenuOpen(false)}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'tween', duration: 0.3 }}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              zIndex: 40,
+              background: 'hsl(var(--navy-light))',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '2.5rem',
+            }}
           >
-            Resume
-          </a>
-        </div>
-      )}
+            <ol style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem' }}>
+              {NAV_ITEMS.map((item) => (
+                <li key={item.id}>
+                  <button
+                    onClick={() => handleNavClick(item.id)}
+                    style={{
+                      fontFamily: 'Fira Code, monospace',
+                      fontSize: '1.25rem',
+                      color: active === item.id ? 'hsl(var(--teal))' : 'hsl(var(--slate-light))',
+                      background: 'none',
+                      border: 'none',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      gap: '0.25rem',
+                    }}
+                  >
+                    <span style={{ color: 'hsl(var(--teal))', fontSize: '0.875rem' }}>{item.num}.</span>
+                    {item.label}
+                  </button>
+                </li>
+              ))}
+            </ol>
+            <a
+              href={personal.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline"
+              onClick={() => setMenuOpen(false)}
+            >
+              Resume
+            </a>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      {/* Hide/show helpers — inline style approach for TS */}
+      {/* Hide/show helpers */}
       <style>{`
         .hidden-mobile { display: flex !important; }
         .show-mobile { display: none !important; }

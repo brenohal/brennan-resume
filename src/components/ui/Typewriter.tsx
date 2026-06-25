@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useReducedMotion } from 'framer-motion'
 
 interface Props {
   words: string[]
@@ -13,11 +14,13 @@ export default function Typewriter({
   deletingSpeed = 50,
   pauseMs = 1800,
 }: Props) {
+  const reduce = useReducedMotion()
   const [displayed, setDisplayed] = useState('')
   const [wordIndex, setWordIndex] = useState(0)
   const [phase, setPhase] = useState<'typing' | 'pausing' | 'deleting'>('typing')
 
   useEffect(() => {
+    if (reduce) return
     const word = words[wordIndex]
     let timeout: ReturnType<typeof setTimeout>
 
@@ -45,11 +48,11 @@ export default function Typewriter({
     }
 
     return () => clearTimeout(timeout)
-  }, [displayed, phase, wordIndex, words, typingSpeed, deletingSpeed, pauseMs])
+  }, [displayed, phase, wordIndex, words, typingSpeed, deletingSpeed, pauseMs, reduce])
 
   return (
     <span style={{ color: 'hsl(var(--slate-light))', fontSize: 'inherit', fontWeight: 'inherit' }}>
-      {displayed}
+      {reduce ? words[0] : displayed}
       <span className="cursor-blink" style={{ color: 'hsl(var(--teal))' }}>|</span>
     </span>
   )
