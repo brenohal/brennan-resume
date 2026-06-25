@@ -25,9 +25,7 @@ export const projects: Project[] = [
       'A full-stack web application built with Java supporting complete Create, Read, Update, and Delete operations. Features a responsive UI, server-side validation, and a relational MySQL database backend.',
     tech: ['Java', 'HTML', 'CSS', 'JavaScript', 'MySQL'],
     github: 'https://github.com/brenohal/web-application-development-java',
-    image: '/brennan-resume/assets/webapp.gif',
     video: '/brennan-resume/assets/webapp.mp4',
-    gif: '/brennan-resume/assets/webapp.gif',
     featured: true,
   },
   {
