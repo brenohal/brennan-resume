@@ -36,6 +36,7 @@ export const projects: Project[] = [
       'A responsive mobile-first web application functioning as a dynamic digital business card. Built with PHP and designed for seamless cross-device display with interactive contact features.',
     tech: ['PHP', 'HTML', 'CSS', 'JavaScript', 'Android Studio'],
     github: 'https://github.com/brenohal/mobile-web-application-development',
+    gif: '/brennan-resume/assets/interactive-business-card.gif',
     featured: true,
   },
   {

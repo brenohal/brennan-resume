@@ -11,7 +11,7 @@ export const personal = {
   linkedin: 'https://www.linkedin.com/in/brennan-o-halloran',
   github: 'https://github.com/brenohal',
   resumeUrl: '/brennan-resume/assets/resume.pdf',
-  headshot: '/brennan-resume/assets/headshot.jpeg',
+  headshot: '/brennan-resume/assets/head2.jpeg',
   contactCopy:
     "I'm currently looking for new opportunities in cybersecurity and IT. Whether you have a question, want to discuss a potential role, or just want to say hi, fill out the form below and I'll get back to you!",
   footer: 'Designed & Built by Brennan O\'Halloran',

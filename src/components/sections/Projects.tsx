@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ExternalLink, Folder, Play, ChevronDown, ChevronUp } from 'lucide-react'
+import { ExternalLink, Folder, Play, ChevronDown, ChevronUp, GitBranch } from 'lucide-react'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 import { projects } from '../../data/projects'
 
@@ -89,12 +89,13 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="GitHub"
+                aria-label="View source on GitHub"
+                title="View source on GitHub"
                 style={{ color: 'hsl(var(--slate))', transition: 'color 0.2s' }}
                 onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'hsl(var(--teal))' }}
                 onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'hsl(var(--slate))' }}
               >
-                <ExternalLink size={18} />
+                <GitBranch size={18} />
               </a>
             )}
             {project.demo && (
@@ -102,7 +103,8 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
                 href={project.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Live demo"
+                aria-label="View live demo"
+                title="View live demo"
                 style={{ color: 'hsl(var(--slate))', transition: 'color 0.2s' }}
                 onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'hsl(var(--teal))' }}
                 onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'hsl(var(--slate))' }}
@@ -132,14 +134,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
 
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '1.25rem' }}>
           {project.tech.map((t) => (
-            <span
-              key={t}
-              style={{
-                fontFamily: 'Fira Code, monospace',
-                fontSize: '0.75rem',
-                color: 'hsl(var(--teal))',
-              }}
-            >
+            <span key={t} className="skill-pill" style={{ fontSize: '0.75rem', padding: '0.25rem 0.6rem' }}>
               {t}
             </span>
           ))}

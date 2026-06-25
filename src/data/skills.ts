@@ -18,6 +18,7 @@ export const skillCategories: SkillCategory[] = [
       'SentinelOne',
       'Palo Alto Panorama',
       'Microsoft Entra ID',
+      'Torq',
     ],
   },
   {
@@ -26,6 +27,9 @@ export const skillCategories: SkillCategory[] = [
       'Selenium',
       'MySQL Workbench',
       'Microsoft SQL Server',
+      'Google Cloud Platform',
+      'OBS Studio',
+      'LLM APIs',
       'VS Code',
       'Microsoft Office',
       'Google Workspace',

@@ -85,7 +85,7 @@ export default function Experience() {
               >
                 {job.company}
                 <br />
-                <span style={{ fontSize: '0.7rem', opacity: 0.7 }}>{job.role}</span>
+                <span style={{ fontSize: '0.75rem', color: 'hsl(var(--slate-light))', opacity: 0.65 }}>{job.role}</span>
               </button>
             ))}
           </div>
@@ -110,15 +110,29 @@ export default function Experience() {
                       style={{
                         marginLeft: '0.75rem',
                         fontFamily: 'Fira Code, monospace',
-                        fontSize: '0.7rem',
+                        fontSize: '0.75rem',
                         background: 'hsl(var(--teal) / 0.15)',
                         color: 'hsl(var(--teal))',
-                        border: '1px solid hsl(var(--teal) / 0.3)',
+                        border: '1px solid hsl(var(--teal) / 0.5)',
                         borderRadius: '20px',
-                        padding: '0.15rem 0.6rem',
+                        padding: '0.2rem 0.65rem',
                         verticalAlign: 'middle',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.35rem',
                       }}
                     >
+                      <span
+                        className="dot-pulse"
+                        style={{
+                          width: '7px',
+                          height: '7px',
+                          borderRadius: '50%',
+                          background: 'hsl(var(--teal))',
+                          display: 'inline-block',
+                          flexShrink: 0,
+                        }}
+                      />
                       Current
                     </span>
                   )}

@@ -8,7 +8,7 @@ export const education = {
   dates: 'August 2022 – May 2026',
   honors: [
     "Dean's List / President's List",
-    'Lambda Pi Eta Honor Society',
+    'Lambda Phi Eta Honor Society',
     'Association for Information Systems',
   ],
   activities: ['FSU Men\'s Club Lacrosse'],
