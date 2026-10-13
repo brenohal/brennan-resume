@@ -43,7 +43,7 @@ export default function About() {
         {/* Bio */}
         <div>
           <FadeIn delay={0.1}>
-            <p style={{ lineHeight: 1.8, marginBottom: '1.25rem' }}>{personal.bio}</p>
+            <p style={{ lineHeight: 1.8, marginBottom: '1.25rem' }}>{personal.summary}</p>
           </FadeIn>
           <FadeIn delay={0.2}>
             <p style={{ lineHeight: 1.8, marginBottom: '2rem' }}>{personal.bioExtended}</p>

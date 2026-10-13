@@ -14,15 +14,29 @@ export interface ExperienceItem {
 export const experience: ExperienceItem[] = [
   {
     company: 'Henry Schein',
-    role: 'Cybersecurity Intern',
-    dates: 'June 2026 – Present',
+    role: 'Internal SOC Analyst (Contract)',
+    dates: 'September 2026 – Present',
     location: 'Remote',
     current: true,
     bullets: [
-      'Conducting GSOC alert analysis using Torq to identify over-triggering detection rules; investigating root causes to reduce false positive rates and improve signal fidelity across the security operations environment.',
+      'Moved from the cybersecurity internship into a contract Internal SOC Analyst role at Henry Schein.',
     ],
     technicalSkills: ['Torq', 'Alert Triage', 'Detection Tuning'],
-    transferableSkills: ['Root-Cause Analysis', 'Security Operations'],
+    transferableSkills: ['Security Operations', 'Root-Cause Analysis'],
+  },
+  {
+    company: 'Henry Schein',
+    role: 'Cybersecurity Intern',
+    dates: 'June 2026 – September 2026',
+    location: 'Remote',
+    bullets: [
+      'Investigated GSOC alerts using Torq to identify over-triggering detection rules; resolved root causes to reduce false positive rates and improve signal fidelity across the security operations environment.',
+      'Built an internal cybersecurity platform using Codex-assisted development, integrating threat intelligence feeds, asset inventory data, and SOAR workflows for zero-day vulnerability response; applied the FAIR model to quantify cyber risk in financial terms for executive decision-making.',
+      'Reviewed and modernized enterprise cybersecurity policies, mapping cross-policy dependencies and control requirements to strengthen governance, traceability, and alignment with NIST and ISO security frameworks.',
+      'Analyzed cybersecurity and data protection policies against NIST CSF-aligned controls and CMM maturity criteria, mapping regulatory requirements, control ownership, and framework alignment to surface compliance gaps and automation opportunities.',
+    ],
+    technicalSkills: ['Torq', 'SOAR', 'FAIR Model', 'NIST CSF', 'ISO', 'Threat Intelligence'],
+    transferableSkills: ['Root-Cause Analysis', 'Risk Quantification', 'Governance & Compliance'],
   },
   {
     company: 'Henry Schein',

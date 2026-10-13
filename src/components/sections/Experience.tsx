@@ -224,7 +224,10 @@ function ExperienceCard({ job, isOpen, onToggle }: {
 }
 
 export default function Experience() {
-  const [openIdx, setOpenIdx] = useState<number | null>(0)
+  // Open the most detailed role first (the current contract role is a one-liner)
+  const [openIdx, setOpenIdx] = useState<number | null>(() =>
+    Math.max(0, experience.findIndex((job) => job.bullets.length > 2)),
+  )
 
   return (
     <section id="experience" style={{ padding: '6rem 2rem', maxWidth: '1100px', margin: '0 auto' }}>

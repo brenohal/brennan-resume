@@ -7,11 +7,11 @@ export interface Involvement {
 
 export const involvement: Involvement[] = [
   {
-    role: 'Streaming Assistant',
+    role: 'Streaming & AV Production',
     org: "FSU Men's Club Lacrosse",
     description:
-      'Manage live broadcasts and technical operations for game-day streams, ensuring reliable audio/video delivery and real-time troubleshooting.',
-    tags: ['Live Streaming', 'Technical Operations', 'Teamwork', 'Problem Solving'],
+      'Set up and operated all video production equipment to livestream practices and games with OBS Studio and Adobe Photoshop; provided live commentary, managed real-time stats, and updated scoreboard graphics (Sept 2024 – May 2026).',
+    tags: ['OBS Studio', 'Adobe Photoshop', 'Live Streaming', 'Real-Time Operations'],
   },
   {
     role: 'Member',

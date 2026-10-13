@@ -29,6 +29,7 @@ export const skillCategories: SkillCategory[] = [
       'Microsoft SQL Server',
       'Google Cloud Platform',
       'OBS Studio',
+      'Adobe Photoshop',
       'LLM APIs',
       'VS Code',
       'Microsoft Office',

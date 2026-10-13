@@ -22,12 +22,12 @@ export const intents: Intent[] = [
   {
     keywords: ['skill', 'tech', 'stack', 'language', 'tool', 'know', 'good at'],
     answer:
-      'Brennan works across security and engineering: Python, SQL/T-SQL, Java, and JavaScript for languages; Palo Alto Panorama, Microsoft Entra ID, Burp Suite, OWASP ZAP, Splunk, SentinelOne, and Torq for security & IAM; plus Selenium, Google Cloud Platform, MySQL, OBS Studio, and LLM APIs.',
+      'Brennan works across security and engineering: Python, SQL/T-SQL, Java, and JavaScript for languages; Palo Alto Panorama, Microsoft Entra ID, Burp Suite, OWASP ZAP, Splunk, SentinelOne, and Torq for security & IAM; plus Selenium, Google Cloud Platform, MySQL, OBS Studio, Adobe Photoshop, and LLM APIs.',
   },
   {
     keywords: ['henry', 'schein', 'intern', 'internship', 'work', 'job', 'experience', 'cyber'],
     answer:
-      'Brennan has interned at Henry Schein three times. Most recently (June 2026 - Present) as a Cybersecurity Intern doing GSOC alert analysis with Torq. In summer 2025 he standardized global firewall rulesets in Palo Alto Panorama, cutting total rules by 14% via Python automation. In 2024 he was a Digital Architecture Intern doing performance and security testing with Selenium, Burp Suite, and OWASP ZAP.',
+      'Brennan has completed three internships at Henry Schein and is now an Internal SOC Analyst there (contract, September 2026 - Present). In summer 2026, as a Cybersecurity Intern, he tuned GSOC detections with Torq, built an internal threat-intel and SOAR platform, and applied the FAIR model to quantify cyber risk. In summer 2025 he standardized global firewall rulesets in Palo Alto Panorama, cutting total rules by 14% via Python automation. In 2024 he was a Digital Architecture Intern doing performance and security testing with Selenium, Burp Suite, and OWASP ZAP.',
   },
   {
     keywords: ['firewall', 'panorama', 'palo alto', '14'],
@@ -42,7 +42,7 @@ export const intents: Intent[] = [
   {
     keywords: ['education', 'school', 'fsu', 'florida', 'degree', 'gpa', 'study', 'college', 'graduate', 'major'],
     answer:
-      "Brennan is pursuing a B.S. in Information Technology at Florida State University (graduating May 2026) with a minor in Business Analytics & Computer Science. He holds a 3.86 GPA, Magna Cum Laude, and is on the Dean's / President's List.",
+      "Brennan graduated in May 2026 with a B.S. in Information Technology from Florida State University, with a minor in Business Analytics & Computer Science. He holds a 3.86 GPA, Magna Cum Laude, and is on the Dean's / President's List.",
   },
   {
     keywords: ['cert', 'certification', 'security+', 'comptia'],
@@ -62,7 +62,7 @@ export const intents: Intent[] = [
   {
     keywords: ['who', 'about', 'yourself', 'you', 'brennan', 'background'],
     answer:
-      "Brennan O'Halloran is an Information Technology student at Florida State University with hands-on cybersecurity, automation, and enterprise-systems experience from three internships at Henry Schein. He focuses on security operations, IAM, and automation.",
+      "Brennan O'Halloran is an Information Technology graduate of Florida State University and an Internal SOC Analyst at Henry Schein, with hands-on cybersecurity, automation, and risk-quantification experience from three internships there. He focuses on security operations, IAM, and automation.",
   },
   {
     keywords: ['resume', 'cv', 'download'],
