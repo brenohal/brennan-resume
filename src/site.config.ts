@@ -12,5 +12,5 @@ export const site = {
   // Formspree/Web3Forms endpoint. Empty = the contact form opens the visitor's email app instead.
   formEndpoint: '',
   // GoatCounter site code (e.g. 'brennan' for brennan.goatcounter.com). Empty = no analytics at all.
-  goatcounter: '',
+  goatcounter: 'brenohal',
 }
