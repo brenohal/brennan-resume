@@ -56,7 +56,8 @@ export default function ChatAssistant() {
           <motion.button
             key="fab"
             className="chat-fab"
-            aria-label="Open assistant"
+            aria-label="Open quick answers"
+            title="Quick answers about Brennan"
             onClick={() => setOpen(true)}
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -74,7 +75,7 @@ export default function ChatAssistant() {
             key="panel"
             className="chat-panel"
             role="dialog"
-            aria-label="Assistant"
+            aria-label="Quick answers about Brennan"
             initial={{ opacity: 0, y: 20, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.96 }}
@@ -86,11 +87,11 @@ export default function ChatAssistant() {
                 <div style={{ color: 'hsl(var(--slate-light))', fontWeight: 600, fontSize: '0.9rem' }}>
                   Ask about Brennan
                 </div>
-                <div style={{ fontSize: '0.7rem', color: 'hsl(var(--slate))' }}>Scripted assistant</div>
+                <div style={{ fontSize: '0.7rem', color: 'hsl(var(--slate))' }}>Scripted answers from this site, not an AI</div>
               </div>
               <button
                 onClick={() => setOpen(false)}
-                aria-label="Close assistant"
+                aria-label="Close quick answers"
                 style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'hsl(var(--slate))', display: 'flex' }}
               >
                 <X size={18} />

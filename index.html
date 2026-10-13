@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/brennan-resume/favicon.svg" />
+    <!--CSP-->
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Brennan O'Halloran · SOC Analyst | Cybersecurity &amp; Automation</title>
@@ -13,15 +14,11 @@
     <meta name="author" content="Brennan O'Halloran" />
     <meta name="theme-color" content="#0d1b2e" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
-    <link rel="canonical" href="https://brenohal.github.io/brennan-resume/" />
+    <link rel="canonical" href="__SITE_URL__" />
 
-    <!-- Fonts: preconnect + link (replaces the render-blocking CSS @import) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap"
-    />
+    <!-- Fonts are self-hosted (src/assets/fonts): no third-party requests -->
+    <link rel="preload" href="/src/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/src/assets/fonts/fira-code-latin.woff2" as="font" type="font/woff2" crossorigin />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -30,8 +27,8 @@
       property="og:description"
       content="Information Technology graduate and Internal SOC Analyst at Henry Schein, focused on cybersecurity, automation, and enterprise systems."
     />
-    <meta property="og:url" content="https://brenohal.github.io/brennan-resume/" />
-    <meta property="og:image" content="https://brenohal.github.io/brennan-resume/assets/og-image.jpg" />
+    <meta property="og:url" content="__SITE_URL__" />
+    <meta property="og:image" content="__SITE_URL__assets/og-image.jpg" />
     <meta property="og:image:alt" content="Brennan O'Halloran — SOC Analyst, Cybersecurity &amp; Automation" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -43,7 +40,7 @@
       name="twitter:description"
       content="Information Technology graduate and Internal SOC Analyst at Henry Schein, focused on cybersecurity, automation, and enterprise systems."
     />
-    <meta name="twitter:image" content="https://brenohal.github.io/brennan-resume/assets/og-image.jpg" />
+    <meta name="twitter:image" content="__SITE_URL__assets/og-image.jpg" />
 
     <!-- Structured data: helps search engines connect this page to the person -->
     <script type="application/ld+json">
@@ -51,8 +48,8 @@
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Brennan O'Halloran",
-        "url": "https://brenohal.github.io/brennan-resume/",
-        "image": "https://brenohal.github.io/brennan-resume/assets/og-image.jpg",
+        "url": "__SITE_URL__",
+        "image": "__SITE_URL__assets/og-image.jpg",
         "jobTitle": "Internal SOC Analyst",
         "description": "Information Technology graduate focused on SOC operations, cybersecurity automation, and cyber risk quantification.",
         "worksFor": { "@type": "Organization", "name": "Henry Schein" },
@@ -88,7 +85,7 @@
           <p style="margin:0 0 1rem">I automate security workflows and quantify cyber risk: GSOC alert triage in Torq and SentinelOne, a 14% reduction in global firewall rules with Python automation in Palo Alto Panorama, and FAIR-model risk quantification for executive decision-making.</p>
           <p style="margin:0 0 1rem">This portfolio is an interactive page that needs JavaScript. Without it you can still reach me here:</p>
           <ul style="padding-left:1.25rem;margin:0">
-            <li><a style="color:#0a6e5f" href="/brennan-resume/assets/resume.pdf">Download my resume (PDF)</a></li>
+            <li><a style="color:#0a6e5f" href="%BASE_URL%assets/resume.pdf">Download my resume (PDF)</a></li>
             <li><a style="color:#0a6e5f" href="https://www.linkedin.com/in/brennan-o-halloran">LinkedIn</a></li>
             <li><a style="color:#0a6e5f" href="https://github.com/brenohal">GitHub</a></li>
             <li><a style="color:#0a6e5f" href="mailto:Brennan.ohal1@gmail.com">Brennan.ohal1@gmail.com</a></li>

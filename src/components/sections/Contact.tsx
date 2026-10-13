@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Send, Mail, Copy, Check } from 'lucide-react'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 import { personal } from '../../data/personal'
+import { site } from '../../site.config'
 import { GithubIcon, LinkedinIcon } from '../ui/BrandIcons'
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
@@ -89,10 +90,10 @@ export default function Contact() {
 
     const payload = { name: form.name.trim(), email: form.email.trim(), message: form.message.trim() }
 
-    if (personal.formEndpoint) {
+    if (site.formEndpoint) {
       setStatus('sending')
       try {
-        const res = await fetch(personal.formEndpoint, {
+        const res = await fetch(site.formEndpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify(payload),
@@ -308,9 +309,6 @@ export default function Contact() {
         </div>
       </FadeIn>
 
-      <style>{`
-        @media (max-width: 480px) { .form-grid { grid-template-columns: 1fr !important; } }
-      `}</style>
     </section>
   )
 }

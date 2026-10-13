@@ -1,73 +1,83 @@
+import { personal } from './personal'
+import { experience } from './experience'
+import { education, certifications } from './education'
+import { skillCategories } from './skills'
+import { projects } from './projects'
+import { caseStudy } from './caseStudy'
+import { involvement } from './involvement'
+
 export interface Intent {
   keywords: string[]
   answer: string
 }
 
-// Scripted knowledge base. Facts mirror the typed data files (personal / experience
-// / education / skills / projects). The matcher scores intents by keyword hits.
-export const greeting =
-  "Hi! I'm Brennan's assistant. Ask me about his experience, skills, projects, education, or how to get in touch."
+// Quick answers, not an AI: a keyword matcher over text that is BUILT from the same data files
+// that render the page (experience, education, skills, projects...). Edit those files and these
+// answers change with them, so the assistant can never contradict the site.
+const list = (xs: string[]) => (xs.length <= 2 ? xs.join(' and ') : `${xs.slice(0, -1).join(', ')}, and ${xs[xs.length - 1]}`)
+const lower = (s: string) => `${s.charAt(0).toLowerCase()}${s.slice(1)}`
 
-export const suggestions = [
-  'What are your skills?',
-  'Tell me about Henry Schein',
-  'Best project?',
-  'Are you available?',
-]
+const current = experience.find((job) => job.current)
+const earlierAtCurrent = experience.filter((job) => job.company === current?.company && job !== current)
+const firewallJob = experience.find((job) => /firewall/i.test(job.headline))
+const lacrosse = involvement.find((item) => /lacrosse/i.test(item.org))
+
+export const greeting =
+  "Hi! These are quick answers about Brennan, built from this site's own content (scripted, not an AI). Ask about his experience, skills, projects, education, or how to get in touch."
+
+export const suggestions = ['What are your skills?', 'Tell me about Henry Schein', 'Best project?', 'Are you available?']
 
 export const fallback =
-  "I'm not sure about that one. Try asking about Brennan's skills, his Henry Schein internships, his projects, education, certifications, or how to reach him."
+  "I'm not sure about that one. Try asking about Brennan's skills, his Henry Schein work, his projects, education, certifications, or how to reach him."
 
 export const intents: Intent[] = [
   {
     keywords: ['skill', 'tech', 'stack', 'language', 'tool', 'know', 'good at'],
-    answer:
-      'Brennan works across security and engineering: Python, SQL/T-SQL, Java, and JavaScript for languages; Palo Alto Panorama, Microsoft Entra ID, Burp Suite, OWASP ZAP, Splunk, SentinelOne, and Torq for security & IAM; plus Selenium, Google Cloud Platform, MySQL, OBS Studio, Adobe Photoshop, and LLM APIs.',
+    answer: `Brennan's skills: ${skillCategories.map((c) => `${c.label}: ${list(c.skills)}`).join('. ')}.`,
   },
   {
-    keywords: ['henry', 'schein', 'intern', 'internship', 'work', 'job', 'experience', 'cyber'],
-    answer:
-      'Brennan has completed three internships at Henry Schein and is now an Internal SOC Analyst there (contract, September 2026 - Present). In summer 2026, as a Cybersecurity Intern, he tuned GSOC detections with Torq, built an internal threat-intel and SOAR platform, and applied the FAIR model to quantify cyber risk. In summer 2025 he standardized global firewall rulesets in Palo Alto Panorama, cutting total rules by 14% via Python automation. In 2024 he was a Digital Architecture Intern doing performance and security testing with Selenium, Burp Suite, and OWASP ZAP.',
+    keywords: ['henry', 'schein', 'intern', 'internship', 'work', 'job', 'experience', 'cyber', 'soc', 'role'],
+    answer: current
+      ? `Brennan is currently ${current.role} at ${current.company} (${current.dates}): ${lower(current.headline)} Earlier at ${current.company}: ${earlierAtCurrent
+          .map((job) => `${job.role} (${job.dates}), ${lower(job.headline)}`)
+          .join(' ')}`
+      : `Brennan's most recent role: ${experience[0].role} at ${experience[0].company}.`,
   },
   {
     keywords: ['firewall', 'panorama', 'palo alto', '14'],
-    answer:
-      'During his 2025 Cybersecurity internship, Brennan analyzed and standardized global firewall rulesets across core and remote entities using Palo Alto Panorama, reducing total rules by 14% through Python-based automation aligned with least-access principles.',
+    answer: firewallJob?.bullets[0] ?? 'Ask about his Henry Schein internships for details on his firewall work.',
   },
   {
-    keywords: ['project', 'built', 'build', 'portfolio', 'github', 'best', 'favorite'],
-    answer:
-      'His standout project is an AI-Driven Job Application Engine that uses LLM-based code generation with multi-provider failover across Cerebras, Groq, OpenRouter, and DeepSeek. He has also built a full-stack Java CRUD app, a PHP mobile business card, an advanced T-SQL data warehouse, and a C++ cruise booking system. Code is on GitHub at github.com/brenohal.',
+    keywords: ['project', 'built', 'build', 'portfolio', 'github', 'best', 'favorite', 'career'],
+    answer: `His flagship project is the ${caseStudy.title}: ${caseStudy.summary} Other projects: ${list(projects.map((p) => p.title))}. The flagship's repository is private, so Brennan is happy to walk through it on request; other code is at github.com/brenohal.`,
   },
   {
     keywords: ['education', 'school', 'fsu', 'florida', 'degree', 'gpa', 'study', 'college', 'graduate', 'major'],
-    answer:
-      "Brennan graduated in May 2026 with a B.S. in Information Technology from Florida State University, with a minor in Business Analytics & Computer Science. He holds a 3.86 GPA, Magna Cum Laude, and is on the Dean's / President's List.",
+    answer: `Brennan graduated in ${education.graduated} with a ${education.degree} from ${education.school} (${education.minor.replace('Minor: ', 'minor in ')}). GPA ${education.gpa}, ${education.honor}. Honors: ${list(education.honors)}.`,
   },
   {
     keywords: ['cert', 'certification', 'security+', 'comptia'],
-    answer:
-      'Brennan is currently working toward the CompTIA Security+ certification.',
+    answer: certifications.length
+      ? `Certifications: ${list(certifications.map((c) => `${c.name} (${c.status})`))}.`
+      : 'Brennan has no certifications listed yet.',
   },
   {
     keywords: ['contact', 'reach', 'email', 'hire', 'available', 'availability', 'opportunit', 'connect', 'get in touch'],
-    answer:
-      "Brennan is open to new opportunities in cybersecurity and IT. Email him at Brennan.ohal1@gmail.com, connect on LinkedIn (linkedin.com/in/brennan-o-halloran), or use the contact form at the bottom of the page.",
+    answer: `${personal.status}. Email him at ${personal.email}, connect on LinkedIn (${personal.linkedin.replace('https://www.', '')}), or use the contact section at the bottom of the page.`,
   },
   {
     keywords: ['lacrosse', 'stream', 'av', 'production', 'sport', 'obs', 'broadcast'],
-    answer:
-      "Outside of tech, Brennan handles streaming & AV production for the Florida State Men's Lacrosse team. He runs the full video production setup with OBS Studio, gives live commentary, manages real-time stats, and updates scoreboard graphics.",
+    answer: lacrosse
+      ? `Outside of tech: ${lacrosse.role} for ${lacrosse.org}. ${lacrosse.description}`
+      : 'Ask about his involvement outside of tech.',
   },
   {
     keywords: ['who', 'about', 'yourself', 'you', 'brennan', 'background'],
-    answer:
-      "Brennan O'Halloran is an Information Technology graduate of Florida State University and an Internal SOC Analyst at Henry Schein, with hands-on cybersecurity, automation, and risk-quantification experience from three internships there. He focuses on security operations, IAM, and automation.",
+    answer: `${personal.name}: ${personal.bio}`,
   },
   {
     keywords: ['resume', 'cv', 'download'],
-    answer:
-      'You can view or download his full resume using the "Resume" button in the top navigation.',
+    answer: 'You can download his full resume with the "Download Resume" button at the top of the page.',
   },
 ]
 
@@ -75,7 +85,8 @@ export function matchAnswer(input: string): string {
   const text = input.toLowerCase()
   let best: { score: number; answer: string } | null = null
   for (const intent of intents) {
-    const score = intent.keywords.reduce((n, kw) => (text.includes(kw) ? n + 1 : n), 0)
+    // Longer keywords are more specific ("firewall" should beat "work"), so weight hits by length
+    const score = intent.keywords.reduce((n, kw) => (text.includes(kw) ? n + kw.length : n), 0)
     if (score > 0 && (!best || score > best.score)) best = { score, answer: intent.answer }
   }
   return best ? best.answer : fallback

@@ -219,20 +219,6 @@ export default function Projects() {
         </>
       )}
 
-      <style>{`
-        .featured-row {
-          display: grid;
-          grid-template-columns: 1.1fr 0.9fr;
-          gap: 2.5rem;
-          align-items: center;
-        }
-        .featured-row.reverse .featured-media { order: 2; }
-        @media (max-width: 800px) {
-          .featured-row,
-          .featured-row.reverse { grid-template-columns: 1fr; gap: 1.5rem; }
-          .featured-row.reverse .featured-media { order: 0; }
-        }
-      `}</style>
     </section>
   )
 }

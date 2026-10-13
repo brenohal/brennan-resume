@@ -5,6 +5,7 @@ import { useActiveSection } from '../../hooks/useActiveSection'
 import ThemeToggle from '../ui/ThemeToggle'
 import { personal } from '../../data/personal'
 import { emitUI } from '../../lib/ui-events'
+import { track } from '../../lib/analytics'
 
 const NAV_ITEMS = [
   { label: 'About', id: 'about', num: '01' },
@@ -142,6 +143,7 @@ export default function Navbar() {
 
               <a
                 href={personal.resumeUrl}
+                onClick={() => track('resume-view-nav', 'Resume view (nav)')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-outline"
@@ -225,7 +227,10 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               className="btn-outline"
-              onClick={() => setMenuOpen(false)}
+              onClick={() => {
+                track('resume-view-menu', 'Resume view (menu)')
+                setMenuOpen(false)
+              }}
             >
               Resume
             </a>
@@ -233,15 +238,6 @@ export default function Navbar() {
         )}
       </AnimatePresence>
 
-      {/* Hide/show helpers */}
-      <style>{`
-        .hidden-mobile { display: flex !important; }
-        .show-mobile { display: none !important; }
-        @media (max-width: 768px) {
-          .hidden-mobile { display: none !important; }
-          .show-mobile { display: flex !important; }
-        }
-      `}</style>
     </>
   )
 }

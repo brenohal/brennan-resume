@@ -1,3 +1,5 @@
+import { asset } from '../lib/asset'
+
 export interface Project {
   title: string
   description: string
@@ -18,8 +20,8 @@ export const projects: Project[] = [
       'A full-stack web application built with Java supporting complete Create, Read, Update, and Delete operations. Features a responsive UI, server-side validation, and a relational MySQL database backend.',
     tech: ['Java', 'HTML', 'CSS', 'JavaScript', 'MySQL'],
     github: 'https://github.com/brenohal/web-application-development-java',
-    video: '/brennan-resume/assets/webapp-720.mp4',
-    poster: '/brennan-resume/assets/webapp-poster.jpg',
+    video: asset('assets/webapp-720.mp4'),
+    poster: asset('assets/webapp-poster.jpg'),
     featured: true,
   },
   {
@@ -28,7 +30,7 @@ export const projects: Project[] = [
       'A responsive mobile-first web application functioning as a dynamic digital business card. Built with PHP and designed for seamless cross-device display with interactive contact features.',
     tech: ['PHP', 'HTML', 'CSS', 'JavaScript', 'Android Studio'],
     github: 'https://github.com/brenohal/mobile-web-application-development',
-    gif: '/brennan-resume/assets/interactive-business-card.gif',
+    gif: asset('assets/interactive-business-card.gif'),
     featured: true,
   },
   {
@@ -37,7 +39,7 @@ export const projects: Project[] = [
       'Designed and implemented a normalized relational database for a legal services firm. Includes a complete data warehouse schema, stored procedures, complex T-SQL queries, and data insertion scripts across multiple related entities.',
     tech: ['T-SQL', 'Microsoft SQL Server', 'MySQL Workbench', 'Data Normalization'],
     github: 'https://github.com/brenohal/advanced-database-design-sql',
-    image: '/brennan-resume/assets/data-warehouse.png',
+    image: asset('assets/data-warehouse.png'),
     featured: true,
   },
   {
@@ -45,7 +47,7 @@ export const projects: Project[] = [
     description:
       'A CLI-based cruise passenger booking system built in C++. Supports full party and passenger management — add, edit, remove, and persist passenger records to file — with robust input validation and error handling.',
     tech: ['C++', 'CLI Design', 'File I/O', 'Data Structures'],
-    image: '/brennan-resume/assets/cruise-booking.png',
+    image: asset('assets/cruise-booking.png'),
     featured: false,
   },
 ]

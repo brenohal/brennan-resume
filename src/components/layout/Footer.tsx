@@ -1,4 +1,5 @@
 import { personal } from '../../data/personal'
+import { site } from '../../site.config'
 
 export default function Footer() {
   return (
@@ -21,6 +22,12 @@ export default function Footer() {
       >
         {personal.footer}
       </a>
+      {/* Derived from the same config that switches analytics on, so this line can never drift from reality */}
+      <p className="site-note">
+        {site.goatcounter
+          ? 'Static site · strict Content-Security-Policy · no cookies · anonymous, cookie-free page counts (GoatCounter)'
+          : 'Static site · strict Content-Security-Policy · self-hosted fonts · no cookies, no trackers'}
+      </p>
     </footer>
   )
 }

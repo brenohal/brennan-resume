@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+/* Self-hosted variable fonts (latin subset): no requests to Google, and real weight 700 for Fira Code */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('./assets/fonts/inter-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Fira Code';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('./assets/fonts/fira-code-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+
 @theme {
   --color-navy: hsl(217 53% 11%);
   --color-navy-light: hsl(217 53% 16%);
@@ -957,4 +976,77 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 560px) {
   .contact-actions { flex-direction: column; align-items: stretch; }
   .contact-actions .btn-outline { justify-content: center; }
+}
+
+/* ============================================================
+   Layout rules that used to live in per-component <style> tags
+   (moved here so the Content-Security-Policy can forbid inline <style>)
+   ============================================================ */
+.hidden-mobile { display: flex !important; }
+.show-mobile { display: none !important; }
+@media (max-width: 768px) {
+  .hidden-mobile { display: none !important; }
+  .show-mobile { display: flex !important; }
+  .about-grid { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 480px) { .form-grid { grid-template-columns: 1fr !important; } }
+.involvement-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+@media (max-width: 860px) { .involvement-grid { grid-template-columns: 1fr; } }
+.featured-row {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+.featured-row.reverse .featured-media { order: 2; }
+@media (max-width: 800px) {
+  .featured-row,
+  .featured-row.reverse { grid-template-columns: 1fr; gap: 1.5rem; }
+  .featured-row.reverse .featured-media { order: 0; }
+}
+
+/* Footer privacy note */
+.site-note {
+  max-width: 44rem;
+  margin: 0.25rem auto 0;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: hsl(var(--slate));
+}
+
+/* ============================================================
+   Print: a clean, ink-friendly one-pager (Ctrl/Cmd+P)
+   ============================================================ */
+@media print {
+  :root,
+  :root[data-theme='dark'],
+  :root[data-theme='light'] {
+    --navy: 0 0% 100%;
+    --navy-light: 0 0% 100%;
+    --navy-lighter: 0 0% 96%;
+    --slate: 215 15% 25%;
+    --slate-light: 0 0% 5%;
+    --teal: 173 85% 20%;
+    --border-col: 0 0% 78%;
+    --gold: 36 90% 25%;
+  }
+  html, body { background: #fff !important; color: #111 !important; }
+  /* Chrome/UI that means nothing on paper */
+  .glass-nav, .skip-link, .scroll-progress, .social-rail, .chat-fab, .chat-panel, .scroll-top,
+  .scroll-cue, .starfield, .palette-backdrop, .hero-ctas, .contact-actions, .form-divider,
+  #contact form { display: none !important; }
+  /* Scroll-reveal animations leave content at opacity 0 until scrolled into view */
+  [style*='opacity'], [style*='transform'] { opacity: 1 !important; transform: none !important; }
+  .hero { min-height: 0; padding: 0; }
+  .hero-inner { padding: 0 0 1rem; }
+  section { padding-top: 1.25rem !important; padding-bottom: 1.25rem !important; }
+  .project-card, .stat-card, .case-study, .involvement-grid > div, .featured-row { break-inside: avoid; box-shadow: none !important; }
+  .stats-band { grid-template-columns: repeat(4, 1fr); }
+  a[href^='http']:not(.stat-card)::after { content: ' (' attr(href) ')'; font-size: 0.7em; word-break: break-all; }
+  @page { margin: 14mm; }
 }

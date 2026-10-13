@@ -1,3 +1,5 @@
+import { asset } from '../lib/asset'
+
 export const personal = {
   name: 'Brennan O\'Halloran',
   status: 'Internal SOC Analyst @ Henry Schein · Open to full-time security roles',
@@ -11,11 +13,8 @@ export const personal = {
   email: 'Brennan.ohal1@gmail.com',
   linkedin: 'https://www.linkedin.com/in/brennan-o-halloran',
   github: 'https://github.com/brenohal',
-  // Paste a Formspree/Web3Forms endpoint here to send contact-form messages straight to your inbox.
-  // Left empty, the form hands the message to the visitor's email app instead.
-  formEndpoint: '',
-  resumeUrl: '/brennan-resume/assets/resume.pdf',
-  headshot: '/brennan-resume/assets/headshot-560.jpg',
+  resumeUrl: asset('assets/resume.pdf'),
+  headshot: asset('assets/headshot-560.jpg'),
   contactCopy:
     "I'm currently looking for new opportunities in cybersecurity and IT. Whether you have a question, want to discuss a potential role, or just want to say hi, email me, message me on LinkedIn, or use the form below and I'll get back to you!",
   footer: 'Designed & Built by Brennan O\'Halloran',

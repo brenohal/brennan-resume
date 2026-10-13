@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight, ArrowDown, MessageCircle, Download, ShieldCheck, Calculator, GraduationCap } from 'lucide-react'
 import Starfield from '../ui/Starfield'
 import { personal } from '../../data/personal'
+import { track } from '../../lib/analytics'
 
 const PROOF = [
   { icon: ShieldCheck, text: '14% fewer firewall rules' },
@@ -79,7 +80,7 @@ export default function Hero() {
         </motion.ul>
 
         <motion.div {...reveal(0.5)} className="hero-ctas">
-          <a href={personal.resumeUrl} download="Brennan_OHalloran_Resume.pdf" className="btn-outline btn-primary">
+          <a href={personal.resumeUrl} download="Brennan_OHalloran_Resume.pdf" onClick={() => track('resume-download-hero', 'Resume download (hero)')} className="btn-outline btn-primary">
             Download Resume <Download size={16} />
           </a>
           <button

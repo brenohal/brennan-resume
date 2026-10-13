@@ -293,14 +293,6 @@ export default function Experience() {
         ))}
       </div>
 
-      <style>{`
-        .involvement-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1.25rem;
-        }
-        @media (max-width: 860px) { .involvement-grid { grid-template-columns: 1fr; } }
-      `}</style>
     </section>
   )
 }
