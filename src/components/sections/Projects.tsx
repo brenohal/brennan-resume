@@ -19,17 +19,15 @@ function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 
 function ProjectLinks({ project }: { project: Project }) {
   return (
-    <div style={{ display: 'flex', gap: '1rem' }}>
+    <div style={{ display: 'flex', gap: '0.25rem', marginLeft: '-0.75rem' }}>
       {project.github && (
         <a
           href={project.github}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="View source on GitHub"
+          aria-label={`${project.title} source code on GitHub`}
           title="View source on GitHub"
-          style={{ color: 'hsl(var(--slate))', transition: 'color 0.2s', display: 'flex' }}
-          onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'hsl(var(--teal))' }}
-          onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'hsl(var(--slate))' }}
+          className="icon-btn"
         >
           <GitBranch size={18} />
         </a>
@@ -39,11 +37,9 @@ function ProjectLinks({ project }: { project: Project }) {
           href={project.demo}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="View live demo"
+          aria-label={`${project.title} live demo`}
           title="View live demo"
-          style={{ color: 'hsl(var(--slate))', transition: 'color 0.2s', display: 'flex' }}
-          onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'hsl(var(--teal))' }}
-          onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'hsl(var(--slate))' }}
+          className="icon-btn"
         >
           <ExternalLink size={18} />
         </a>
@@ -61,12 +57,14 @@ function ProjectMedia({ project }: { project: Project }) {
       loop
       playsInline
       controls
+      preload="metadata"
+      aria-label={`${project.title} demo video`}
       style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
     />
   ) : project.gif ? (
-    <img src={project.gif} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+    <img src={project.gif} alt={`${project.title} screenshot`} loading="lazy" decoding="async" width={800} height={500} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
   ) : project.image ? (
-    <img src={project.image} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+    <img src={project.image} alt={`${project.title} screenshot`} loading="lazy" decoding="async" width={800} height={500} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
   ) : null
 
   if (media) {

@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -23,15 +22,26 @@
   --teal: 166 100% 70%;
   --border-col: 217 30% 25%;
   --muted: 217 53% 18%;
+  --gold: 41 100% 73%;
+  --danger: 0 100% 74%;
   --radius: 0.5rem;
+  color-scheme: dark;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html {
   scroll-behavior: smooth;
+  /* Keeps anchored sections from sliding under the fixed 70px navbar */
+  scroll-padding-top: 70px;
   font-family: 'Inter', system-ui, sans-serif;
+  -webkit-text-size-adjust: 100%;
 }
+
+button { font: inherit; }
+
+p { text-wrap: pretty; }
+h1, h2, h3 { text-wrap: balance; }
 
 body {
   background-color: hsl(var(--navy));
@@ -106,13 +116,40 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid hsl(var(--border-col));
   border-radius: var(--radius);
   padding: 1.5rem;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
-.project-card:hover {
+.project-card:hover,
+.project-card:focus-within {
   transform: translateY(-5px);
   box-shadow: 0 10px 30px -15px hsl(var(--teal) / 0.3);
   border-color: hsl(var(--teal) / 0.3);
 }
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  overflow: hidden;
+}
+/* Reserve the typewriter's line so cycling words never shift the layout */
+.hero-role { min-height: 1.2em; }
+
+.headshot {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  position: relative;
+  z-index: 1;
+  filter: grayscale(20%);
+  transition: filter 0.3s;
+}
+.headshot:hover { filter: none; }
+
+.gold { color: hsl(var(--gold)); }
 
 .skill-pill {
   font-family: 'Fira Code', monospace;
@@ -147,6 +184,114 @@ h1, h2, h3, h4, h5, h6 {
   gap: 0.5rem;
 }
 .btn-outline:hover { background: hsl(var(--teal) / 0.1); }
+.btn-outline:active { transform: translateY(1px); }
+.btn-outline:disabled { cursor: not-allowed; opacity: 0.6; }
+.btn-outline.btn-secondary {
+  border-color: hsl(var(--border-col));
+  color: hsl(var(--slate-light));
+}
+.btn-outline.btn-secondary:hover {
+  border-color: hsl(var(--teal) / 0.6);
+  background: hsl(var(--teal) / 0.06);
+}
+
+.logo-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  font-family: 'Fira Code', monospace;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: hsl(var(--teal));
+  background: none;
+  border: 2px solid hsl(var(--teal));
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.logo-mark:hover { background: hsl(var(--teal) / 0.1); }
+
+.scroll-top {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 40;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: hsl(var(--teal));
+  background: hsl(var(--navy-light));
+  border: 1px solid hsl(var(--teal));
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.scroll-top:hover { background: hsl(var(--navy-lighter)); }
+
+/* Shared icon-only controls: 44px hit area, hover AND keyboard-focus feedback */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  background: none;
+  border: none;
+  border-radius: var(--radius);
+  color: hsl(var(--slate));
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s, background 0.2s, transform 0.2s;
+}
+.icon-btn:hover,
+.icon-btn:focus-visible { color: hsl(var(--teal)); }
+.icon-btn.lift:hover { transform: translateY(-3px); }
+
+/* Inline text links that tint on hover/focus */
+.text-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.text-link:hover,
+.text-link:focus-visible { color: hsl(var(--teal)); }
+
+/* Form fields */
+.field {
+  width: 100%;
+  background: hsl(var(--navy-light));
+  border: 1px solid hsl(var(--border-col));
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  color: hsl(var(--slate-light));
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem; /* 16px stops iOS Safari zooming on focus */
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.field::placeholder { color: hsl(var(--slate)); opacity: 0.7; }
+.field:focus {
+  outline: none;
+  border-color: hsl(var(--teal));
+  box-shadow: 0 0 0 3px hsl(var(--teal) / 0.2);
+}
+.field[aria-invalid='true'] { border-color: hsl(var(--danger)); }
+.field[aria-invalid='true']:focus { box-shadow: 0 0 0 3px hsl(var(--danger) / 0.25); }
+.field-label {
+  display: block;
+  font-size: 0.8125rem;
+  margin-bottom: 0.4rem;
+  color: hsl(var(--slate-light));
+}
+.field-error {
+  color: hsl(var(--danger));
+  font-size: 0.8125rem;
+  margin-top: 0.3rem;
+}
 
 @keyframes dot-pulse {
   0%, 100% { box-shadow: 0 0 10px hsl(var(--teal) / 0.5); }
@@ -192,6 +337,9 @@ h1, h2, h3, h4, h5, h6 {
   --teal: 173 78% 30%;
   --border-col: 214 22% 84%;
   --muted: 210 30% 92%;
+  --gold: 36 90% 30%;
+  --danger: 0 72% 42%;
+  color-scheme: light;
 }
 
 :root[data-theme='light'] body {
@@ -284,8 +432,13 @@ h1, h2, h3, h4, h5, h6 {
   color: hsl(var(--slate));
   transition: color 0.2s, transform 0.2s;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
 }
-.social-rail a:hover {
+.social-rail a:hover,
+.social-rail a:focus-visible {
   color: hsl(var(--teal));
   transform: translateY(-3px);
 }

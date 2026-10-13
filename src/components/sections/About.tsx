@@ -3,7 +3,7 @@ import { useScrollReveal } from '../../hooks/useScrollReveal'
 import { personal } from '../../data/personal'
 import { skillCategories } from '../../data/skills'
 import { education, certifications } from '../../data/education'
-import { GraduationCap, Award, Users } from 'lucide-react'
+import { GraduationCap, Award, BadgeCheck } from 'lucide-react'
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const { ref, isInView } = useScrollReveal()
@@ -86,17 +86,11 @@ export default function About() {
               <img
                 src={personal.headshot}
                 alt="Brennan O'Halloran"
-                style={{
-                  width: '100%',
-                  borderRadius: '8px',
-                  display: 'block',
-                  position: 'relative',
-                  zIndex: 1,
-                  filter: 'grayscale(20%)',
-                  transition: 'filter 0.3s',
-                }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLImageElement).style.filter = 'none' }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLImageElement).style.filter = 'grayscale(20%)' }}
+                width={560}
+                height={840}
+                loading="lazy"
+                decoding="async"
+                className="headshot"
               />
             </div>
           </FadeIn>
@@ -157,7 +151,7 @@ export default function About() {
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-                <Users size={16} style={{ color: 'hsl(var(--teal))' }} />
+                <BadgeCheck size={16} style={{ color: 'hsl(var(--teal))' }} />
                 <span style={{ color: 'hsl(var(--slate-light))', fontWeight: 600, fontSize: '0.9rem' }}>Certifications</span>
               </div>
               {certifications.map((cert) => (

@@ -14,22 +14,8 @@ export default function ThemeToggle({ style }: Props) {
       onClick={toggle}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       title={isDark ? 'Light mode' : 'Dark mode'}
-      style={{
-        background: 'none',
-        border: 'none',
-        cursor: 'pointer',
-        color: 'hsl(var(--slate))',
-        display: 'flex',
-        padding: '0.25rem',
-        transition: 'color 0.2s',
-        ...style,
-      }}
-      onMouseEnter={(e) => {
-        ;(e.currentTarget as HTMLElement).style.color = 'hsl(var(--teal))'
-      }}
-      onMouseLeave={(e) => {
-        ;(e.currentTarget as HTMLElement).style.color = 'hsl(var(--slate))'
-      }}
+      className="icon-btn"
+      style={style}
     >
       {isDark ? <Sun size={18} /> : <Moon size={18} />}
     </button>

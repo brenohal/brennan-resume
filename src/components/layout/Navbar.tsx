@@ -85,25 +85,7 @@ export default function Navbar() {
           <button
             onClick={() => scrollTo('home')}
             aria-label="Go to top"
-            style={{
-              fontFamily: 'Fira Code, monospace',
-              fontWeight: 700,
-              fontSize: '1.25rem',
-              color: 'hsl(var(--teal))',
-              background: 'none',
-              border: '2px solid hsl(var(--teal))',
-              borderRadius: '6px',
-              width: '40px',
-              height: '40px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              transition: 'background 0.2s',
-              flexShrink: 0,
-            }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = 'hsl(var(--teal) / 0.1)' }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = 'none' }}
+            className="logo-mark"
           >
             B
           </button>
@@ -116,12 +98,13 @@ export default function Navbar() {
                   <button
                     onClick={() => handleNavClick(item.id)}
                     className="nav-link"
+                    aria-current={active === item.id ? 'true' : undefined}
                     style={{
                       background: 'none',
                       border: 'none',
                       cursor: 'pointer',
                       color: active === item.id ? 'hsl(var(--teal))' : undefined,
-                      padding: '0 0 0.35rem',
+                      padding: '0.55rem 0 0.6rem',
                     }}
                   >
                     <span className="num">{item.num}.</span>
@@ -152,17 +135,7 @@ export default function Navbar() {
                 onClick={() => emitUI('open-palette')}
                 aria-label="Open command palette"
                 title="Command palette (Ctrl/⌘ K)"
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                  color: 'hsl(var(--slate))',
-                  display: 'flex',
-                  transition: 'color 0.2s',
-                  padding: '0.25rem',
-                }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'hsl(var(--teal))' }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'hsl(var(--slate))' }}
+                className="icon-btn"
               >
                 <Command size={18} />
               </button>
@@ -185,15 +158,16 @@ export default function Navbar() {
             <button
               onClick={() => emitUI('open-palette')}
               aria-label="Open command palette"
-              style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'hsl(var(--slate))', display: 'flex' }}
+              className="icon-btn"
             >
               <Command size={18} />
             </button>
             <button
               onClick={() => setMenuOpen((v) => !v)}
-              aria-label="Toggle menu"
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={menuOpen}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'hsl(var(--teal))', display: 'flex' }}
+              className="icon-btn"
+              style={{ color: 'hsl(var(--teal))' }}
             >
               {menuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
@@ -229,6 +203,7 @@ export default function Navbar() {
                     style={{
                       fontFamily: 'Fira Code, monospace',
                       fontSize: '1.25rem',
+                      padding: '0.5rem 1rem',
                       color: active === item.id ? 'hsl(var(--teal))' : 'hsl(var(--slate-light))',
                       background: 'none',
                       border: 'none',

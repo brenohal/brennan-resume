@@ -128,10 +128,10 @@ function ExperienceCard({ job, isOpen, onToggle }: {
             {job.highlight && (
               <span
                 title={job.highlight}
+                className="gold"
                 style={{
                   fontFamily: 'Fira Code, monospace',
-                  fontSize: '0.7rem',
-                  color: '#ffd479',
+                  fontSize: '0.75rem',
                 }}
               >
                 ★ DoD
@@ -167,7 +167,7 @@ function ExperienceCard({ job, isOpen, onToggle }: {
                     border: '1px solid hsl(var(--teal) / 0.25)',
                     borderRadius: 'var(--radius)',
                     padding: '0.6rem 0.9rem',
-                    color: '#ffd479',
+                    color: 'hsl(var(--gold))',
                     fontSize: '0.85rem',
                     fontWeight: 500,
                   }}
@@ -255,7 +255,7 @@ export default function Experience() {
             gap: '0.75rem',
           }}
         >
-          <span style={{ color: 'hsl(var(--teal))', fontSize: '0.9rem' }}>03.5</span>
+          <span aria-hidden="true" style={{ color: 'hsl(var(--teal))', fontSize: '0.9rem' }}>▹</span>
           Leadership &amp; Involvement
         </h3>
       </FadeIn>

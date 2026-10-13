@@ -6,17 +6,7 @@ import { personal } from '../../data/personal'
 
 export default function Hero() {
   return (
-    <section
-      id="home"
-      style={{
-        position: 'relative',
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        padding: '0 2rem',
-        overflow: 'hidden',
-      }}
-    >
+    <section id="home" className="hero">
       <Starfield />
 
       <div style={{ maxWidth: '1100px', margin: '0 auto', width: '100%', paddingTop: '70px' }}>
@@ -46,6 +36,8 @@ export default function Hero() {
         </motion.h1>
 
         <motion.h2
+          className="hero-role"
+          aria-label={personal.roles.join(', ')}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
@@ -89,8 +81,7 @@ export default function Hero() {
           </button>
           <button
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="btn-outline"
-            style={{ borderColor: 'hsl(var(--border-col))', color: 'hsl(var(--slate-light))' }}
+            className="btn-outline btn-secondary"
           >
             Get In Touch <MessageCircle size={16} />
           </button>
@@ -118,8 +109,9 @@ export default function Hero() {
           alignItems: 'center',
           gap: '0.35rem',
           fontFamily: 'Fira Code, monospace',
-          fontSize: '0.7rem',
+          fontSize: '0.75rem',
           letterSpacing: '0.1em',
+          padding: '0.5rem 1rem',
         }}
       >
         Scroll
