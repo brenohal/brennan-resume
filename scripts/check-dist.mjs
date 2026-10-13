@@ -97,7 +97,9 @@ for (const file of htmlFiles) {
 }
 
 // ---------- site-level files ----------
-for (const f of ['404.html', 'sitemap.xml', 'favicon.svg', 'og-image.jpg', 'assets/resume.pdf']) if (!existsSync(join(DIST, f))) fail('dist', `missing ${f}`)
+for (const f of ['404.html', 'sitemap.xml', 'favicon.svg', 'og-image.jpg', 'assets/resume.pdf', '.nojekyll']) if (!existsSync(join(DIST, f))) fail('dist', `missing ${f}`)
+// GitHub Pages runs Jekyll unless .nojekyll exists, and Jekyll silently drops every _-prefixed folder, including _astro/ (all CSS, JS, fonts).
+
 if (existsSync(join(DIST, 'og-image.jpg'))) {
   const m = await sharp(join(DIST, 'og-image.jpg')).metadata()
   if (m.width !== 1200 || m.height !== 630) fail('og-image.jpg', `must be 1200x630, is ${m.width}x${m.height}`)
