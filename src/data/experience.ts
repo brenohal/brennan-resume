@@ -19,9 +19,9 @@ export const experience: ExperienceItem[] = [
     location: 'Remote',
     current: true,
     bullets: [
-      'Moved from the cybersecurity internship into a contract Internal SOC Analyst role at Henry Schein.',
+      'Take cases from Torq and investigate them in SentinelOne as part of day-to-day security operations.',
     ],
-    technicalSkills: ['Torq', 'Alert Triage', 'Detection Tuning'],
+    technicalSkills: ['Torq', 'SentinelOne', 'Case Investigation'],
     transferableSkills: ['Security Operations', 'Root-Cause Analysis'],
   },
   {

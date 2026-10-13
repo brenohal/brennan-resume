@@ -14,9 +14,8 @@ export const projects: Project[] = [
   {
     title: 'AI-Driven Job Application Engine',
     description:
-      'Engineered an AI-driven automation tool using LLM-based code generation to streamline job application workflows; integrated multi-provider LLM failover across Cerebras, Groq, OpenRouter, and DeepSeek for resilience and speed.',
+      'Engineered an AI-driven automation tool using LLM-based code generation to streamline job application workflows; integrated multi-provider LLM failover across Cerebras, Groq, OpenRouter, and DeepSeek.',
     tech: ['Python', 'Node.js', 'Cerebras', 'Groq', 'DeepSeek', 'LLM APIs'],
-    github: 'https://github.com/brenohal',
     featured: true,
   },
   {

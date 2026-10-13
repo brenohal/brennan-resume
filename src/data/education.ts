@@ -11,7 +11,7 @@ export const education = {
     'Lambda Pi Eta Honor Society',
     'Association for Information Systems',
   ],
-  activities: ['FSU Men\'s Club Lacrosse'],
+  activities: ["Florida State Men's Lacrosse (Streaming & AV Production)"],
 }
 
 export const certifications = [
