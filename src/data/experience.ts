@@ -1,6 +1,8 @@
 export interface ExperienceItem {
   company: string
   role: string
+  /** One-line outcome, always visible on the collapsed card */
+  headline: string
   dates: string
   location: string
   bullets: string[]
@@ -16,6 +18,8 @@ export const experience: ExperienceItem[] = [
     company: 'Henry Schein',
     role: 'Internal SOC Analyst (Contract)',
     dates: 'September 2026 – Present',
+    headline:
+      'Takes cases from Torq and investigates them in SentinelOne.',
     location: 'Remote',
     current: true,
     bullets: [
@@ -28,6 +32,8 @@ export const experience: ExperienceItem[] = [
     company: 'Henry Schein',
     role: 'Cybersecurity Intern',
     dates: 'June 2026 – September 2026',
+    headline:
+      'Built an internal threat-intel and SOAR platform, and used the FAIR model to put cyber risk in financial terms for executives.',
     location: 'Remote',
     bullets: [
       'Investigated GSOC alerts using Torq to identify over-triggering detection rules; resolved root causes to reduce false positive rates and improve signal fidelity across the security operations environment.',
@@ -42,6 +48,8 @@ export const experience: ExperienceItem[] = [
     company: 'Henry Schein',
     role: 'Cybersecurity Intern',
     dates: 'May 2025 – August 2025',
+    headline:
+      'Cut global firewall rules by 14% with Python automation in Palo Alto Panorama, following least-access principles.',
     location: 'Remote',
     bullets: [
       'Analyzed and standardized global firewall rulesets across core and remote entities using Palo Alto and Panorama; reduced total rules by 14% through Python-based automation aligned with least-access principles.',
@@ -57,6 +65,8 @@ export const experience: ExperienceItem[] = [
     company: 'Henry Schein',
     role: 'Digital Architecture Intern',
     dates: 'May 2024 – August 2024',
+    headline:
+      'Found and remediated web-app vulnerabilities with Burp Suite and OWASP ZAP; automated e-commerce test cases with Selenium.',
     location: 'Remote',
     bullets: [
       'Assisted in conducting comprehensive performance testing on a new global e-commerce platform using Selenium to automate test cases, ensuring efficiency and reliability in the software development lifecycle.',
@@ -72,6 +82,8 @@ export const experience: ExperienceItem[] = [
     company: 'AI Strategy Corporation',
     role: 'Intern',
     dates: 'December 2022 – January 2023',
+    headline:
+      'Wrote AI explainer-video scripts that were presented to the U.S. Department of Defense.',
     location: 'Babylon, NY',
     highlight: 'Presented to the United States Department of Defense',
     bullets: [

@@ -141,6 +141,7 @@ function ExperienceCard({ job, isOpen, onToggle }: {
           <p style={{ fontFamily: 'Fira Code, monospace', fontSize: '0.8125rem', color: 'hsl(var(--slate))', marginTop: '0.3rem' }}>
             {job.dates} &bull; {job.location}
           </p>
+          {!isOpen && <p className="job-headline">{job.headline}</p>}
         </div>
         <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.25 }} style={{ color: 'hsl(var(--teal))', display: 'flex', flexShrink: 0 }}>
           <ChevronDown size={20} />

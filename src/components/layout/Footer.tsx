@@ -17,7 +17,7 @@ export default function Footer() {
         target="_blank"
         rel="noopener noreferrer"
         className="text-link"
-        style={{ display: 'inline-block', padding: '0.6rem 0.5rem' }}
+        style={{ display: 'inline-block', padding: '0.85rem 0.5rem' }}
       >
         {personal.footer}
       </a>

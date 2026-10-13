@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { ExternalLink, GitBranch, Sparkles, Folder } from 'lucide-react'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 import LazyVideo from '../ui/LazyVideo'
+import CaseStudy from './CaseStudy'
 import { projects, type Project } from '../../data/projects'
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
@@ -180,6 +181,8 @@ export default function Projects() {
           Things I've Built
         </h2>
       </FadeIn>
+
+      <CaseStudy />
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '4rem' }}>
         {featured.map((project, i) => (

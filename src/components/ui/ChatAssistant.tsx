@@ -14,10 +14,19 @@ export default function ChatAssistant() {
   const [messages, setMessages] = useState<Message[]>([{ role: 'bot', text: greeting }])
   const [input, setInput] = useState('')
   const [typing, setTyping] = useState(false)
+  // Keep the first screen uncluttered: the chat button appears once the visitor scrolls past the hero
+  const [pastHero, setPastHero] = useState(false)
   const bodyRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => onUI('open-chat', () => setOpen(true)), [])
+
+  useEffect(() => {
+    const onScroll = () => setPastHero(window.scrollY > 320)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   useEffect(() => {
     if (open) setTimeout(() => inputRef.current?.focus(), 50)
@@ -43,7 +52,7 @@ export default function ChatAssistant() {
   return (
     <>
       <AnimatePresence>
-        {!open && (
+        {!open && pastHero && (
           <motion.button
             key="fab"
             className="chat-fab"

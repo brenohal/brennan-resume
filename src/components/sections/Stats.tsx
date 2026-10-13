@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
-import { GraduationCap, Briefcase, ShieldCheck, FolderGit2 } from 'lucide-react'
+import { GraduationCap, Briefcase, ShieldCheck, Wrench } from 'lucide-react'
 import { stats, type Stat } from '../../data/stats'
 
 const ICONS: Record<Stat['icon'], React.ComponentType<{ size?: number; style?: React.CSSProperties }>> = {
   gpa: GraduationCap,
-  intern: Briefcase,
+  roles: Briefcase,
   firewall: ShieldCheck,
-  projects: FolderGit2,
+  tools: Wrench,
 }
 
 function useCountUp(target: number, decimals: number, run: boolean, duration = 1400) {
@@ -40,7 +40,8 @@ function StatCard({ stat, run, delay }: { stat: Stat; run: boolean; delay: numbe
   const display = useCountUp(stat.value, stat.decimals ?? 0, run)
   const Icon = ICONS[stat.icon]
   return (
-    <motion.div
+    <motion.a
+      href={stat.href}
       className="stat-card"
       initial={{ opacity: 0, y: 20 }}
       animate={run ? { opacity: 1, y: 0 } : {}}
@@ -53,7 +54,7 @@ function StatCard({ stat, run, delay }: { stat: Stat; run: boolean; delay: numbe
         {stat.suffix}
       </div>
       <div className="stat-label">{stat.label}</div>
-    </motion.div>
+    </motion.a>
   )
 }
 

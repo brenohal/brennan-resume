@@ -1,96 +1,98 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, ArrowDown, MessageCircle, Download } from 'lucide-react'
+import { ArrowRight, ArrowDown, MessageCircle, Download, ShieldCheck, Calculator, GraduationCap } from 'lucide-react'
 import Starfield from '../ui/Starfield'
-import Typewriter from '../ui/Typewriter'
 import { personal } from '../../data/personal'
+
+const PROOF = [
+  { icon: ShieldCheck, text: '14% fewer firewall rules' },
+  { icon: Calculator, text: 'Cyber risk quantified with the FAIR model' },
+  { icon: GraduationCap, text: '3.86 GPA · Magna Cum Laude' },
+]
+
+const reveal = (delay: number) => ({
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5, delay },
+})
 
 export default function Hero() {
   return (
     <section id="home" className="hero">
       <Starfield />
 
-      <div style={{ maxWidth: '1100px', margin: '0 auto', width: '100%', paddingTop: '70px' }}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          style={{ fontFamily: 'Fira Code, monospace', color: 'hsl(var(--teal))', fontSize: '1rem', marginBottom: '1.25rem' }}
-        >
-          {personal.greeting}
+      <div className="hero-inner">
+        <motion.div {...reveal(0.1)}>
+          <span className="status-pill">
+            <span className="status-dot dot-pulse" aria-hidden="true" />
+            {personal.status}
+          </span>
         </motion.div>
 
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          {...reveal(0.2)}
           style={{
             fontSize: 'clamp(2.5rem, 7vw, 5rem)',
             fontWeight: 800,
             color: 'hsl(var(--slate-light))',
             lineHeight: 1.1,
-            marginBottom: '0.5rem',
+            marginBottom: '0.75rem',
             letterSpacing: '-0.02em',
           }}
         >
           {personal.tagline}
         </motion.h1>
 
-        <motion.h2
-          className="hero-role"
-          aria-label={personal.roles.join(', ')}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+        <motion.p
+          {...reveal(0.3)}
           style={{
-            fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
+            fontSize: 'clamp(1.35rem, 3.6vw, 2.25rem)',
             fontWeight: 700,
             color: 'hsl(var(--slate))',
-            marginBottom: '2rem',
-            lineHeight: 1.2,
+            marginBottom: '1.5rem',
+            lineHeight: 1.25,
+            maxWidth: '22em',
           }}
         >
-          <Typewriter words={personal.roles} />
-        </motion.h2>
+          {personal.headline}
+        </motion.p>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          {...reveal(0.4)}
           style={{
-            maxWidth: '520px',
+            maxWidth: '560px',
             lineHeight: 1.7,
             fontSize: '1rem',
-            marginBottom: '2.5rem',
+            marginBottom: '1.75rem',
             color: 'hsl(var(--slate))',
           }}
         >
           {personal.bio}
         </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}
-        >
-          <a
-            href={personal.resumeUrl}
-            download="Brennan_OHalloran_Resume.pdf"
-            className="btn-outline btn-primary"
-          >
+        <motion.ul {...reveal(0.45)} className="proof-chips" aria-label="Highlights">
+          {PROOF.map(({ icon: Icon, text }) => (
+            <li key={text} className="proof-chip">
+              <Icon size={16} aria-hidden="true" />
+              {text}
+            </li>
+          ))}
+        </motion.ul>
+
+        <motion.div {...reveal(0.5)} className="hero-ctas">
+          <a href={personal.resumeUrl} download="Brennan_OHalloran_Resume.pdf" className="btn-outline btn-primary">
             Download Resume <Download size={16} />
           </a>
           <button
             onClick={() => document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' })}
             className="btn-outline btn-secondary"
           >
-            View My Experience <ArrowRight size={16} />
+            <span className="lg-only">View My&nbsp;</span>Experience <ArrowRight size={16} />
           </button>
           <button
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             className="btn-outline btn-secondary"
           >
-            Get In Touch <MessageCircle size={16} />
+            <span className="lg-only">Get In Touch</span><span className="sm-only">Contact</span> <MessageCircle size={16} />
           </button>
         </motion.div>
       </div>
@@ -99,6 +101,7 @@ export default function Hero() {
       <motion.button
         onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
         aria-label="Scroll to about"
+        className="scroll-cue"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.6 }}

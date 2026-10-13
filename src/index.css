@@ -135,7 +135,6 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
 }
 /* Reserve the typewriter's line so cycling words never shift the layout */
-.hero-role { min-height: 1.2em; }
 
 .headshot {
   width: 100%;
@@ -720,6 +719,9 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0 2rem;
 }
 .stat-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
   background: hsl(var(--navy-light));
   border: 1px solid hsl(var(--border-col));
   border-radius: var(--radius);
@@ -748,4 +750,211 @@ h1, h2, h3, h4, h5, h6 {
   .stats-band {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+/* ============================================================
+   Hero: status pill + proof chips
+   ============================================================ */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  max-width: 100%;
+  padding: 0.4rem 0.9rem;
+  margin-bottom: 1.5rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: hsl(var(--teal));
+  background: hsl(var(--teal) / 0.08);
+  border: 1px solid hsl(var(--teal) / 0.35);
+  border-radius: 999px;
+}
+.status-pill .status-dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: hsl(var(--teal));
+}
+.proof-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0 0 2.25rem;
+  padding: 0;
+  list-style: none;
+}
+.proof-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.8rem;
+  font-size: 0.8125rem;
+  color: hsl(var(--slate-light));
+  background: hsl(var(--navy-light));
+  border: 1px solid hsl(var(--border-col));
+  border-radius: var(--radius);
+}
+.proof-chip svg { flex-shrink: 0; color: hsl(var(--teal)); }
+
+/* Always-visible one-line outcome on collapsed experience cards */
+.job-headline {
+  margin-top: 0.55rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: hsl(var(--slate-light));
+}
+
+/* ============================================================
+   Contact: quick actions
+   ============================================================ */
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+.form-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 1.75rem;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.75rem;
+  color: hsl(var(--slate));
+}
+.form-divider::before,
+.form-divider::after { content: ''; flex: 1; height: 1px; background: hsl(var(--border-col)); }
+.hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* ============================================================
+   Flagship case study
+   ============================================================ */
+.case-study {
+  background: hsl(var(--navy-light));
+  border: 1px solid hsl(var(--teal) / 0.3);
+  border-radius: 12px;
+  padding: clamp(1.25rem, 3vw, 2.25rem);
+  margin-bottom: 4rem;
+}
+.case-eyebrow {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.75rem;
+  color: hsl(var(--teal));
+  margin-bottom: 0.5rem;
+}
+.case-flow {
+  display: flex;
+  align-items: stretch;
+  gap: 1.4rem;
+  margin: 1.75rem 0;
+  padding: 0;
+  list-style: none;
+}
+.case-flow > li {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 0.85rem 0.75rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  background: hsl(var(--navy));
+  border: 1px solid hsl(var(--border-col));
+  border-radius: var(--radius);
+}
+.case-flow > li strong { display: block; margin-bottom: 0.25rem; color: hsl(var(--slate-light)); font-size: 0.8125rem; }
+.case-flow > li.accent {
+  border-color: hsl(var(--teal) / 0.5);
+  background: linear-gradient(hsl(var(--teal) / 0.07), hsl(var(--teal) / 0.07)), hsl(var(--navy));
+}
+.case-flow > li:not(:last-child)::after {
+  content: '→';
+  position: absolute;
+  top: 50%;
+  right: -1.25rem;
+  transform: translateY(-50%);
+  width: 1.1rem;
+  text-align: center;
+  color: hsl(var(--teal));
+  font-family: 'Fira Code', monospace;
+  font-size: 1rem;
+}
+.case-cols {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 2rem;
+}
+.case-cols h4 {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: hsl(var(--teal));
+  margin-bottom: 0.6rem;
+}
+.case-cols p, .case-cols li { font-size: 0.9rem; line-height: 1.7; }
+.case-cols ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+.case-cols li { display: flex; gap: 0.6rem; }
+.case-cols li::before { content: '▹'; color: hsl(var(--teal)); flex-shrink: 0; }
+.case-note {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid hsl(var(--border-col));
+  font-size: 0.8125rem;
+  line-height: 1.65;
+}
+@media (max-width: 860px) {
+  .case-flow { flex-direction: column; gap: 1.1rem; }
+  .case-flow > li:not(:last-child)::after {
+    content: '↓';
+    top: auto;
+    right: auto;
+    bottom: -1.05rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .case-cols { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+
+/* Visually hidden, still announced by screen readers (Tailwind's own utility isn't used here) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Hero layout: clears the fixed navbar, never collides with the scroll cue */
+.hero-inner {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 6rem 0 4.5rem;
+}
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; }
+/* The scroll cue only fits when there is spare room under the content */
+@media (max-width: 768px), (max-height: 860px) {
+  .hero .scroll-cue { display: none !important; }
+}
+@media (max-width: 560px) {
+  .hero-inner { padding-top: 6.25rem; }
+  .hero-ctas { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .hero-ctas .btn-primary { grid-column: 1 / -1; justify-content: center; }
+  .hero-ctas .btn-secondary { justify-content: center; padding-inline: 0.75rem; }
+}
+
+/* Long labels that shrink on phones ("View My Experience" -> "Experience") */
+.sm-only { display: none; }
+@media (max-width: 560px) { .lg-only { display: none; } .sm-only { display: inline; } }
+
+@media (max-width: 560px) {
+  .contact-actions { flex-direction: column; align-items: stretch; }
+  .contact-actions .btn-outline { justify-content: center; }
 }

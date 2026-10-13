@@ -13,13 +13,6 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: 'AI-Driven Job Application Engine',
-    description:
-      'Engineered an AI-driven automation tool using LLM-based code generation to streamline job application workflows; integrated multi-provider LLM failover across Cerebras, Groq, OpenRouter, and DeepSeek.',
-    tech: ['Python', 'Node.js', 'Cerebras', 'Groq', 'DeepSeek', 'LLM APIs'],
-    featured: true,
-  },
-  {
     title: 'Dynamic CRUD Web Application',
     description:
       'A full-stack web application built with Java supporting complete Create, Read, Update, and Delete operations. Features a responsive UI, server-side validation, and a relational MySQL database backend.',

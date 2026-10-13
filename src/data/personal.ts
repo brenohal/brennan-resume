@@ -1,9 +1,9 @@
 export const personal = {
   name: 'Brennan O\'Halloran',
-  greeting: 'Hi, my name is',
+  status: 'Internal SOC Analyst @ Henry Schein · Open to full-time security roles',
   tagline: 'Brennan O\'Halloran.',
-  roles: ['SOC Analyst', 'Automation Engineer', 'Security Analyst'],
-  bio: "I'm an Information Technology graduate from Florida State University, now an Internal SOC Analyst at Henry Schein, automating security workflows and quantifying cyber risk.",
+  headline: 'I automate security workflows and quantify cyber risk.',
+  bio: "Internal SOC Analyst at Henry Schein and Florida State University IT graduate (Magna Cum Laude), with hands-on work across GSOC operations, firewall management, and secure software development.",
   summary:
     "Information Technology graduate with progressive, hands-on cybersecurity experience across GSOC operations, firewall management, and secure software development. I automate security workflows, reduce enterprise risk, and quantify cyber exposure using the FAIR model, built across three internships at Henry Schein.",
   bioExtended:
@@ -11,9 +11,12 @@ export const personal = {
   email: 'Brennan.ohal1@gmail.com',
   linkedin: 'https://www.linkedin.com/in/brennan-o-halloran',
   github: 'https://github.com/brenohal',
+  // Paste a Formspree/Web3Forms endpoint here to send contact-form messages straight to your inbox.
+  // Left empty, the form hands the message to the visitor's email app instead.
+  formEndpoint: '',
   resumeUrl: '/brennan-resume/assets/resume.pdf',
   headshot: '/brennan-resume/assets/headshot-560.jpg',
   contactCopy:
-    "I'm currently looking for new opportunities in cybersecurity and IT. Whether you have a question, want to discuss a potential role, or just want to say hi, fill out the form below and I'll get back to you!",
+    "I'm currently looking for new opportunities in cybersecurity and IT. Whether you have a question, want to discuss a potential role, or just want to say hi, email me, message me on LinkedIn, or use the form below and I'll get back to you!",
   footer: 'Designed & Built by Brennan O\'Halloran',
 }
