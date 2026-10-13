@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-2iWK/DVV0drAXQ60ZvqlmAo3l+C26ezmxQa8RgRY42M='; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self' data:; font-src 'self'; media-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests" />
     <link rel="icon" type="image/svg+xml" href="/brennan-resume/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -15,13 +16,9 @@
     <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
     <link rel="canonical" href="https://brenohal.github.io/brennan-resume/" />
 
-    <!-- Fonts: preconnect + link (replaces the render-blocking CSS @import) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap"
-    />
+    <!-- Fonts are self-hosted (src/assets/fonts): no third-party requests -->
+    <link rel="preload" href="/brennan-resume/assets/inter-latin-Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/brennan-resume/assets/fira-code-latin-CHoedHDv.woff2" as="font" type="font/woff2" crossorigin />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -78,8 +75,8 @@
         }
       })()
     </script>
-    <script type="module" crossorigin src="/brennan-resume/assets/index-B_U4ueBS.js"></script>
-    <link rel="stylesheet" crossorigin href="/brennan-resume/assets/index-CmIWJFCY.css">
+    <script type="module" crossorigin src="/brennan-resume/assets/index-B7xPK0aN.js"></script>
+    <link rel="stylesheet" crossorigin href="/brennan-resume/assets/index-BkWcB7bF.css">
   </head>
   <body>
     <noscript>
