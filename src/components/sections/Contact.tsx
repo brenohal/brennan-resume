@@ -97,6 +97,8 @@ export default function Contact() {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify(payload),
+          // Never leave a visitor stuck on "Sending…": give up after 15s and offer the email fallback
+          signal: AbortSignal.timeout(15000),
         })
         setStatus(res.ok ? 'sent' : 'failed')
       } catch {

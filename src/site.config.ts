@@ -10,7 +10,7 @@ export const site = {
   origin: customDomain ? `https://${customDomain}` : 'https://brenohal.github.io',
   base: customDomain ? '/' : '/brennan-resume/',
   // Formspree/Web3Forms endpoint. Empty = the contact form opens the visitor's email app instead.
-  formEndpoint: '',
+  formEndpoint: 'https://formspree.io/f/xppqyloe',
   // GoatCounter site code (e.g. 'brennan' for brennan.goatcounter.com). Empty = no analytics at all.
   goatcounter: 'brenohal',
 }
