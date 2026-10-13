@@ -13,15 +13,11 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "@radix-ui/react-accordion": "^1.2.14",
-    "@radix-ui/react-dialog": "^1.1.17",
-    "@radix-ui/react-tabs": "^1.1.15",
     "@tailwindcss/vite": "^4.3.1",
     "framer-motion": "^12.41.0",
     "lucide-react": "^1.21.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "react-router-dom": "^7.18.0",
     "tailwindcss": "^4.3.1"
   },
   "devDependencies": {

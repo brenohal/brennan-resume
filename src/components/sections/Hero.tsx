@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, ArrowDown, MessageCircle } from 'lucide-react'
+import { ArrowRight, ArrowDown, MessageCircle, Download } from 'lucide-react'
 import Starfield from '../ui/Starfield'
 import Typewriter from '../ui/Typewriter'
 import { personal } from '../../data/personal'
@@ -73,9 +73,16 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.5 }}
           style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}
         >
+          <a
+            href={personal.resumeUrl}
+            download="Brennan_OHalloran_Resume.pdf"
+            className="btn-outline btn-primary"
+          >
+            Download Resume <Download size={16} />
+          </a>
           <button
             onClick={() => document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' })}
-            className="btn-outline"
+            className="btn-outline btn-secondary"
           >
             View My Experience <ArrowRight size={16} />
           </button>

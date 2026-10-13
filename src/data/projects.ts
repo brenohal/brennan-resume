@@ -6,6 +6,7 @@ export interface Project {
   demo?: string
   image?: string
   video?: string
+  poster?: string
   gif?: string
   featured: boolean
 }
@@ -24,7 +25,8 @@ export const projects: Project[] = [
       'A full-stack web application built with Java supporting complete Create, Read, Update, and Delete operations. Features a responsive UI, server-side validation, and a relational MySQL database backend.',
     tech: ['Java', 'HTML', 'CSS', 'JavaScript', 'MySQL'],
     github: 'https://github.com/brenohal/web-application-development-java',
-    video: '/brennan-resume/assets/webapp.mp4',
+    video: '/brennan-resume/assets/webapp-720.mp4',
+    poster: '/brennan-resume/assets/webapp-poster.jpg',
     featured: true,
   },
   {

@@ -113,7 +113,7 @@ export default function About() {
               <p style={{ fontSize: '0.8125rem', marginTop: '0.25rem' }}>{education.degree}</p>
               <p style={{ fontSize: '0.8125rem' }}>{education.minor}</p>
               <p style={{ fontSize: '0.8125rem', color: 'hsl(var(--teal))', marginTop: '0.25rem' }}>GPA: {education.gpa} &bull; {education.honor}</p>
-              <p style={{ fontSize: '0.75rem', marginTop: '0.25rem', opacity: 0.7 }}>{education.dates}</p>
+              <p style={{ fontSize: '0.8125rem', marginTop: '0.25rem' }}>{education.dates}</p>
             </div>
           </FadeIn>
 

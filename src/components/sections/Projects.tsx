@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { ExternalLink, GitBranch, Sparkles, Folder } from 'lucide-react'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
+import LazyVideo from '../ui/LazyVideo'
 import { projects, type Project } from '../../data/projects'
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
@@ -50,17 +51,7 @@ function ProjectLinks({ project }: { project: Project }) {
 
 function ProjectMedia({ project }: { project: Project }) {
   const media = project.video ? (
-    <video
-      src={project.video}
-      autoPlay
-      muted
-      loop
-      playsInline
-      controls
-      preload="metadata"
-      aria-label={`${project.title} demo video`}
-      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-    />
+    <LazyVideo src={project.video} poster={project.poster} label={`${project.title} demo video`} />
   ) : project.gif ? (
     <img src={project.gif} alt={`${project.title} screenshot`} loading="lazy" decoding="async" width={800} height={500} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
   ) : project.image ? (

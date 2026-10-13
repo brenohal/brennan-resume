@@ -184,6 +184,12 @@ h1, h2, h3, h4, h5, h6 {
   gap: 0.5rem;
 }
 .btn-outline:hover { background: hsl(var(--teal) / 0.1); }
+.btn-outline.btn-primary {
+  background: hsl(var(--teal));
+  color: hsl(var(--navy));
+  font-weight: 500;
+}
+.btn-outline.btn-primary:hover { background: hsl(var(--teal) / 0.88); }
 .btn-outline:active { transform: translateY(1px); }
 .btn-outline:disabled { cursor: not-allowed; opacity: 0.6; }
 .btn-outline.btn-secondary {
@@ -334,7 +340,7 @@ h1, h2, h3, h4, h5, h6 {
   --navy-lighter: 210 30% 94%;
   --slate: 215 20% 38%;
   --slate-light: 217 33% 17%;
-  --teal: 173 78% 30%;
+  --teal: 173 85% 25%;
   --border-col: 214 22% 84%;
   --muted: 210 30% 92%;
   --gold: 36 90% 30%;

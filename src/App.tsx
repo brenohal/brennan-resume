@@ -1,3 +1,4 @@
+import { MotionConfig } from 'framer-motion'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import SocialRail from './components/layout/SocialRail'
@@ -14,7 +15,7 @@ import ChatAssistant from './components/ui/ChatAssistant'
 
 export default function App() {
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       <a className="skip-link" href="#main">Skip to content</a>
       <ScrollProgress />
       <Navbar />
@@ -31,6 +32,6 @@ export default function App() {
       <ScrollToTop />
       <CommandPalette />
       <ChatAssistant />
-    </>
+    </MotionConfig>
   )
 }
