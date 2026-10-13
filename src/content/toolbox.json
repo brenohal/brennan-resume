@@ -1,0 +1,9 @@
+[
+  { "id": "security", "order": 0, "label": "Security & IAM", "items": [
+    { "name": "Torq", "core": true }, { "name": "SentinelOne", "core": true }, { "name": "Splunk", "core": true },
+    { "name": "Palo Alto Panorama" }, { "name": "Microsoft Entra ID" }, { "name": "Burp Suite" }, { "name": "OWASP ZAP" }, { "name": "Kali Linux" } ] },
+  { "id": "automation", "order": 1, "label": "Automation & data", "items": [
+    { "name": "Python", "core": true }, { "name": "SQL / T-SQL" }, { "name": "Selenium" }, { "name": "MySQL" }, { "name": "LLM APIs" } ] },
+  { "id": "platforms", "order": 2, "label": "Languages & platforms", "items": [
+    { "name": "Java" }, { "name": "JavaScript" }, { "name": "HTML / CSS" }, { "name": "Google Cloud Platform" }, { "name": "OBS Studio" }, { "name": "Adobe Photoshop" } ] }
+]

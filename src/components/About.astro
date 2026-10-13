@@ -1,0 +1,33 @@
+---
+import Icon from './Icon.astro'
+import { personal, getCredentials, getToolbox } from '../lib/data'
+const credentials = await getCredentials()
+const toolbox = await getToolbox()
+---
+<section class="section section--flush" id="about" aria-labelledby="about-h">
+  <div class="container">
+    <div class="about">
+      <div class="reveal about__copy">
+        <span class="eyebrow">01 · About</span>
+        <h2 class="h2 h2--tight" id="about-h">Security work, automated and measured.</h2>
+        <p>{personal.summary}</p>
+        <p>{personal.aboutBeyond}</p>
+      </div>
+      <div class="toolbox reveal" aria-label="Toolbox">
+        {toolbox.map(({ data: g }) => (
+          <div>
+            <h3>{g.label}</h3>
+            <div class="chips">
+              {g.items.map((i) => <span class:list={['chip', { 'chip--accent': i.core }]}>{i.name}</span>)}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="creds reveal">
+      {credentials.map(({ data: c }) => (
+        <div class="cred"><Icon name={c.icon as any} /><div><b>{c.title}</b><span>{c.detail}</span></div></div>
+      ))}
+    </div>
+  </div>
+</section>

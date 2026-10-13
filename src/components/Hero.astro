@@ -1,0 +1,41 @@
+---
+import { Picture } from 'astro:assets'
+import Icon from './Icon.astro'
+import portrait from '../assets/images/portrait.jpg'
+import { personal } from '../lib/data'
+import { url } from '../lib/url'
+
+const [first, ...rest] = personal.name.split(' ')
+---
+<section class="hero" aria-labelledby="h1">
+  <div class="grid-bg hero__bg" aria-hidden="true"></div>
+  <div class="container hero__grid hero__inner">
+    <div class="hero__copy">
+      <p class="status"><span class="dot" aria-hidden="true"></span>{personal.status}</p>
+      <h1 id="h1">{first}<br />{rest.join(' ')}<span class="dotmark">.</span></h1>
+      <p class="lead">I automate security workflows and <strong>quantify cyber risk</strong>.</p>
+      <p class="hero__sub">{personal.heroSub}</p>
+      <div class="cta-row">
+        <a class="btn btn--primary" href={url(personal.resumeFile)} download="Brennan_OHalloran_Resume.pdf" data-track="resume-download-hero"><Icon name="download" /> Download Resume</a>
+        <a class="btn" href={`mailto:${personal.email}`}><Icon name="mail" /> Email me</a>
+        <a class="btn btn--ghost" href={personal.linkedin} target="_blank" rel="noopener noreferrer"><Icon name="linkedin" /> LinkedIn</a>
+      </div>
+      <ul class="facts" aria-label="Credentials">
+        {personal.facts.map((f) => <li><Icon name={f.icon as any} /> {f.text}</li>)}
+      </ul>
+    </div>
+    <div class="hero__visual">
+      <figure class="portrait">
+        <Picture src={portrait} alt={personal.name} formats={['avif', 'webp']} widths={[360, 720]} sizes="(max-width: 520px) 320px, 360px" loading="eager" fetchpriority="high" />
+      </figure>
+      <div class="terminal" role="group" aria-label="Impact highlights">
+        <div class="terminal__bar"><span class="dot" aria-hidden="true"></span>~/impact.log</div>
+        <div class="terminal__body">
+          {personal.impact.map((r) => (
+            <div class="t-row"><Icon name="check" /><div><span class="t-key">{r.key}</span> <span class="t-val">{r.value}</span>{r.note && <><br /><span class="t-note">{r.note}</span></>}</div></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

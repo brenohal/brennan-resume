@@ -1,0 +1,24 @@
+[
+  {
+    "id": "florida-state-men-s-lacrosse",
+    "role": "Streaming & AV Production",
+    "org": "Florida State Men's Lacrosse",
+    "description": "Set up and operated all video production equipment to livestream practices and games with OBS Studio and Adobe Photoshop; provided live commentary, managed real-time stats, and updated scoreboard graphics (Sept 2024 – May 2026).",
+    "period": "Sep 2024 – May 2026",
+    "order": 0
+  },
+  {
+    "id": "association-for-information-systems",
+    "role": "Member",
+    "org": "Association for Information Systems",
+    "description": "Engage with peers and professionals in information systems, attending workshops and events focused on IT trends and career development.",
+    "order": 1
+  },
+  {
+    "id": "lambda-pi-eta-honor-society",
+    "role": "Member",
+    "org": "Lambda Pi Eta Honor Society",
+    "description": "Recognized for academic excellence and commitment to the study of communication, maintaining a high GPA and contributing to scholarly discussions.",
+    "order": 2
+  }
+]

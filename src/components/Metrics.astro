@@ -1,0 +1,17 @@
+---
+import { getMetrics } from '../lib/data'
+const metrics = await getMetrics()
+---
+<section class="band" aria-label="Impact">
+  <div class="container">
+    <div class="metrics reveal">
+      {metrics.map(({ data: m }) => (
+        <a class="metric" href={m.href}>
+          <div class="metric__v">{m.value}</div>
+          <div class="metric__l">{m.label}</div>
+          <div class="metric__s">{m.source}</div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,6 @@
+[
+  { "id": "firewall", "order": 0, "value": "14%", "label": "Fewer firewall rules", "source": "Henry Schein · 2025 internship", "href": "#work" },
+  { "id": "roles", "order": 1, "value": "4", "label": "Roles at Henry Schein", "source": "3 internships + SOC Analyst", "href": "#work" },
+  { "id": "tools", "order": 2, "value": "7", "label": "Security tools", "source": "Splunk · SentinelOne · Torq · Entra ID …", "href": "#about" },
+  { "id": "gpa", "order": 3, "value": "3.86", "label": "GPA, Magna Cum Laude", "source": "Florida State University", "href": "#about" }
+]

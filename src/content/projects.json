@@ -1,0 +1,65 @@
+[
+  {
+    "id": "dynamic-crud-web-application",
+    "title": "Dynamic CRUD Web Application",
+    "description": "A full-stack web application built with Java supporting complete Create, Read, Update, and Delete operations. Features a responsive UI, server-side validation, and a relational MySQL database backend.",
+    "tech": [
+      "Java",
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "MySQL"
+    ],
+    "image": "webapp-poster.jpg",
+    "tag": "Coursework",
+    "github": "https://github.com/brenohal/web-application-development-java",
+    "video": "assets/webapp-720.mp4",
+    "order": 0
+  },
+  {
+    "id": "interactive-mobile-business-card",
+    "title": "Interactive Mobile Business Card",
+    "description": "A responsive mobile-first web application functioning as a dynamic digital business card. Built with PHP and designed for seamless cross-device display with interactive contact features.",
+    "tech": [
+      "PHP",
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Android Studio"
+    ],
+    "image": "business-card-poster.jpg",
+    "tag": "Coursework",
+    "github": "https://github.com/brenohal/mobile-web-application-development",
+    "video": "assets/business-card.mp4",
+    "order": 1
+  },
+  {
+    "id": "advanced-database-design",
+    "title": "Advanced Database Design",
+    "description": "Designed and implemented a normalized relational database for a legal services firm. Includes a complete data warehouse schema, stored procedures, complex T-SQL queries, and data insertion scripts across multiple related entities.",
+    "tech": [
+      "T-SQL",
+      "Microsoft SQL Server",
+      "MySQL Workbench",
+      "Data Normalization"
+    ],
+    "image": "data-warehouse.png",
+    "tag": "Coursework",
+    "github": "https://github.com/brenohal/advanced-database-design-sql",
+    "order": 2
+  },
+  {
+    "id": "spudwegian-cruise-booking-system",
+    "title": "Spudwegian Cruise Booking System",
+    "description": "A CLI-based cruise passenger booking system built in C++. Supports full party and passenger management — add, edit, remove, and persist passenger records to file — with robust input validation and error handling.",
+    "tech": [
+      "C++",
+      "CLI Design",
+      "File I/O",
+      "Data Structures"
+    ],
+    "image": "cruise-booking.png",
+    "tag": "Coursework",
+    "order": 3
+  }
+]

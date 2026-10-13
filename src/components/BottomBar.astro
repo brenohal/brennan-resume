@@ -1,0 +1,11 @@
+---
+import Icon from './Icon.astro'
+import { personal } from '../lib/data'
+import { url } from '../lib/url'
+const { home = true } = Astro.props
+---
+<!-- Phones only (CSS): the two actions a recruiter wants are always one tap away -->
+<div class="bottombar">
+  <a class="btn btn--primary" href={url(personal.resumeFile)} download="Brennan_OHalloran_Resume.pdf" data-track="resume-download-bar"><Icon name="download" /> Resume</a>
+  <a class="btn" href={home ? '#contact' : `${url('')}#contact`}><Icon name="mail" /> Contact</a>
+</div>

@@ -1,0 +1,58 @@
+---
+import Icon from './Icon.astro'
+import { getExperience, getInvolvement } from '../lib/data'
+import { formatRange } from '../lib/format'
+
+const jobs = await getExperience()
+const involvement = await getInvolvement()
+// Open the most detailed role by default; the rest stay one click away.
+const richest = jobs.reduce((a, b) => (b.data.bullets.length > a.data.bullets.length ? b : a)).id
+const inviteIcons = ['terminal', 'users', 'award'] as const
+---
+<section class="section section--flush" id="work" aria-labelledby="work-h">
+  <div class="container">
+    <div class="work">
+      <div class="work__intro reveal">
+        <span class="eyebrow">02 · Work</span>
+        <h2 class="h2 h2--tight" id="work-h">Where I’ve worked, and what changed.</h2>
+        <p class="intro-copy">Every role leads with its outcome. The detail is one click away, so a skim gives the story and a read gives the evidence.</p>
+        <div class="chips chips--spaced">
+          <span class="chip chip--accent"><span class="dot" aria-hidden="true"></span>Current role</span>
+          <span class="chip">Henry Schein × {jobs.filter((j) => j.data.company === 'Henry Schein').length}</span>
+        </div>
+      </div>
+      <ol class="timeline">
+        {jobs.map(({ id, data: j }) => (
+          <li class:list={['job', 'reveal', { 'job--now': j.current }]}>
+            <article class="card job__card">
+              <div class="job__top">
+                <h3 class="job__role">
+                  {j.role} <em>@ {j.company}</em>
+                  {j.current && <span class="chip chip--accent"><span class="dot" aria-hidden="true"></span>Now</span>}
+                </h3>
+                <span class="job__dates">{formatRange(j.start, j.end)}</span>
+              </div>
+              <p class="job__headline">{j.headline}</p>
+              <details open={id === richest}>
+                <summary><Icon name="chevron" /><span class="sum-open">Hide details</span><span class="sum-closed">Show details</span></summary>
+                <ul>{j.bullets.map((b) => <li><span>{b}</span></li>)}</ul>
+                {j.takeaway && <blockquote class="takeaway"><b>Key takeaway</b>{j.takeaway}</blockquote>}
+                <div class="chips">
+                  {j.skills.map((s, i) => <span class:list={['chip', { 'chip--accent': i < 2 }]}>{s}</span>)}
+                </div>
+              </details>
+            </article>
+          </li>
+        ))}
+      </ol>
+    </div>
+    <div class="involve reveal" aria-label="Leadership and involvement">
+      {involvement.map(({ data: k }, i) => (
+        <div class="cred">
+          <Icon name={inviteIcons[i] ?? 'users'} />
+          <div><b>{k.role}</b><span>{k.org}{k.period ? ` · ${k.period}` : ''}</span></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

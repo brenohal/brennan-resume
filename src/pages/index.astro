@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro'
+import Nav from '../components/Nav.astro'
+import Hero from '../components/Hero.astro'
+import Metrics from '../components/Metrics.astro'
+import About from '../components/About.astro'
+import Work from '../components/Work.astro'
+import Projects from '../components/Projects.astro'
+import Contact from '../components/Contact.astro'
+import Footer from '../components/Footer.astro'
+import BottomBar from '../components/BottomBar.astro'
+import Palette from '../components/Palette.astro'
+import { personal, education, getExperience } from '../lib/data'
+import { absolute } from '../lib/url'
+
+const jobs = await getExperience()
+const current = jobs.find((j) => j.data.current)?.data
+const description = `${personal.name} is an Internal SOC Analyst at Henry Schein and a Florida State University Information Technology graduate, with hands-on experience in GSOC operations, firewall management, automation, and cyber risk quantification.`
+// Structured data is built from the same content that renders the page, so it cannot disagree with it.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: personal.name,
+  url: absolute(),
+  image: absolute('og-image.jpg'),
+  jobTitle: current?.role.replace(' (Contract)', ''),
+  description: personal.heroSub,
+  worksFor: { '@type': 'Organization', name: current?.company },
+  alumniOf: { '@type': 'CollegeOrUniversity', name: education.school },
+  knowsAbout: ['Security operations', 'SOAR', 'Firewall management', 'FAIR risk quantification', 'NIST CSF', 'Python automation'],
+  sameAs: [personal.linkedin, personal.github],
+}
+---
+<Base title={`${personal.name} · SOC Analyst | Cybersecurity & Automation`} description={description} jsonLd={jsonLd}>
+  <Nav />
+  <main id="main">
+    <Hero />
+    <Metrics />
+    <About />
+    <Work />
+    <Projects />
+    <Contact />
+  </main>
+  <Footer />
+  <BottomBar />
+  <Palette />
+  <noscript>
+    <div class="nojs">
+      <div class="card">
+        <b>Some extras are off.</b>
+        <p>Everything on this page works without JavaScript. Only the theme switch, command palette, and in-page form feedback need it. You can still <a href="mailto:{personal.email}">email me</a>.</p>
+      </div>
+    </div>
+  </noscript>
+  <script>
+    import '../scripts/site.ts'
+  </script>
+</Base>

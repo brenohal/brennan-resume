@@ -1,0 +1,31 @@
+---
+import Icon from './Icon.astro'
+import { sections, personal } from '../lib/data'
+import { url } from '../lib/url'
+
+// On the home page section links are in-page anchors; elsewhere they point back to the home page.
+const { home = true } = Astro.props
+const prefix = home ? '' : url('')
+const resume = url(personal.resumeFile)
+---
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="container nav__inner">
+    <a class="logo" href={url('')} aria-label={`${personal.name}, home`}>B</a>
+    <ul class="nav__links">
+      {sections.map((s) => <li><a href={`${prefix}#${s.id}`} data-spy={home ? s.id : undefined}>{s.label}</a></li>)}
+    </ul>
+    <button class="kbd" type="button" data-open-palette aria-label="Open command palette"><Icon name="command" /> K</button>
+    <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-label="Switch between light and dark theme">
+      <Icon name="sun" class="i-sun" /><Icon name="moon" class="i-moon" />
+    </button>
+    <a class="btn btn--primary btn--sm btn--hide-sm" href={resume} target="_blank" rel="noopener" data-track="resume-view-nav"><Icon name="download" /> Resume</a>
+    <button class="icon-btn nav__menu" type="button" popovertarget="menu" aria-label="Open menu"><Icon name="menu" /></button>
+  </div>
+  <span class="progress" aria-hidden="true"></span>
+  <nav id="menu" class="menu-panel" popover aria-label="Menu">
+    {sections.map((s) => <a href={`${prefix}#${s.id}`}>{s.label}<span>{s.num}</span></a>)}
+    <hr />
+    <a href={resume} target="_blank" rel="noopener" data-track="resume-view-menu">Resume (PDF)<span>↗</span></a>
+  </nav>
+</header>

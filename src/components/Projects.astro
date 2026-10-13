@@ -1,0 +1,79 @@
+---
+import { Image } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
+import Icon from './Icon.astro'
+import { caseStudy, getProjects } from '../lib/data'
+import { url } from '../lib/url'
+
+const projects = await getProjects()
+const images = import.meta.glob<{ default: ImageMetadata }>('../assets/images/*.{jpg,png}', { eager: true })
+const imageFor = (name: string) => images[`../assets/images/${name}`]?.default
+---
+<section class="section section--flush" id="projects" aria-labelledby="proj-h">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">03 · Projects</span>
+      <h2 class="h2 h2--tight" id="proj-h">One flagship build, plus the coursework behind it.</h2>
+    </div>
+
+    <article class="card case reveal" aria-labelledby="case-t">
+      <div class="case__head">
+        <span class="eyebrow">{caseStudy.eyebrow}</span>
+        <h3 id="case-t">{caseStudy.title}</h3>
+        <p>{caseStudy.summary}</p>
+        <div class="chips chips--spaced">
+          {caseStudy.stack.map((t, i) => <span class:list={['chip', { 'chip--accent': i < 2 }]}>{t}</span>)}
+        </div>
+      </div>
+      <div class="case__body">
+        <div class="case__col">
+          <p class="label">How it fits together</p>
+          <ol class="steps">
+            {caseStudy.flow.map((s) => <li><b>{s.title}</b><span>{s.detail}</span></li>)}
+          </ol>
+        </div>
+        <div class="case__col">
+          <p class="label">Router behavior <span class="dim">(illustration)</span></p>
+          <div class="router" role="img" aria-label="Illustration: four providers, one on cooldown after a 429, one with a single model benched">
+            <div class="router__bar"><span>request → router</span><span>failover order</span></div>
+            {caseStudy.router.map((p) => (
+              <div class="prov"><div><b>{p.name}</b><small>{p.note}</small></div><span class={`state state--${p.state}`}>{p.label}</span></div>
+            ))}
+          </div>
+          <p class="dim case__result">{caseStudy.result}</p>
+        </div>
+      </div>
+      <div class="case__foot">
+        <p>{caseStudy.note}</p>
+        <a class="btn" href={url('work/job-application-engine/')}>Read the case study <Icon name="arrow" /></a>
+      </div>
+    </article>
+
+    <div class="projects mt-5">
+      {projects.map(({ data: p }) => {
+        const img = imageFor(p.image)
+        const poster = p.video ? imageFor(p.image) : undefined
+        return (
+          <article class="card project reveal">
+            {p.video ? (
+              <div class="media" data-media>
+                {poster && <Image src={poster} alt={`${p.title} preview`} widths={[480, 800]} sizes="(max-width: 760px) 100vw, 560px" loading="lazy" />}
+                <button class="media__play" type="button" data-media-play data-src={url(p.video)} data-label={`${p.title} demo`}>
+                  <span><Icon name="play" /> Play demo</span>
+                </button>
+              </div>
+            ) : (
+              img && <Image class="project__img" src={img} alt={`${p.title} screenshot`} widths={[480, 800]} sizes="(max-width: 760px) 100vw, 560px" loading="lazy" />
+            )}
+            <div class="project__body">
+              <div class="project__top"><h3>{p.title}</h3><span class="tag">{p.tag}</span></div>
+              <p>{p.description}</p>
+              <div class="chips">{p.tech.map((t) => <span class="chip">{t}</span>)}</div>
+              {p.github && <a class="project__link" href={p.github} target="_blank" rel="noopener noreferrer"><Icon name="github" /> Source on GitHub</a>}
+            </div>
+          </article>
+        )
+      })}
+    </div>
+  </div>
+</section>

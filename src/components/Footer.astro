@@ -1,0 +1,25 @@
+---
+import { personal } from '../lib/data'
+import { site } from '../site.config'
+import { url } from '../lib/url'
+---
+<footer class="footer">
+  <div class="container footer__grid">
+    <div>
+      <p>Designed &amp; built by {personal.name} with Claude.</p>
+      <!-- Derived from the same config that switches analytics on, so this line cannot drift from reality -->
+      <p class="footer__note">
+        {site.goatcounter
+          ? 'Static site · strict Content-Security-Policy · self-hosted fonts · no cookies · anonymous, cookie-free page counts (GoatCounter)'
+          : 'Static site · strict Content-Security-Policy · self-hosted fonts · no cookies, no trackers'}
+      </p>
+    </div>
+    <nav aria-label="Footer">
+      <a href={personal.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href={personal.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href={url(personal.resumeFile)} target="_blank" rel="noopener" data-track="resume-view-footer">Resume (PDF)</a>
+      <a href={url('resume/')}>Print view</a>
+      <a href="#top">Back to top ↑</a>
+    </nav>
+  </div>
+</footer>

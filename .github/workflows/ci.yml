@@ -1,19 +1,20 @@
 name: CI
 
-# Verifies every push and pull request. Deployment stays manual (`npm run deploy`).
+# Verifies every push and pull request. Deployment stays a deliberate manual step (`npm run deploy`).
 on:
   push:
-    branches: [main]
+    branches: [main, v2]
   pull_request:
 
-# Least privilege: this workflow only needs to read the repository.
+# Least privilege: nothing here needs to write to the repository.
 permissions:
   contents: read
 
 jobs:
   verify:
+    name: Build, quality gate, and browser tests
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       # Actions are pinned to full commit SHAs (the tag is in the comment), not mutable tags.
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -24,11 +25,24 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Type-check
-        run: npx tsc -b
       - name: Lint
         run: npm run lint
-      - name: Build
+      - name: Build (type-check, share image, site, then the dist quality gate)
         run: npm run build
       - name: Audit production dependencies
         run: npm audit --omit=dev --audit-level=high
+      - name: Install browser
+        run: npx playwright install --with-deps chromium
+      - name: Browser tests (accessibility + behavior, desktop and phone)
+        run: npm test
+        env:
+          CI: 'true'
+      - name: Keep the report if something failed
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7

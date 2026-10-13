@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro'
+import Nav from '../components/Nav.astro'
+import { personal } from '../lib/data'
+import { url } from '../lib/url'
+---
+<Base title={`Page not found · ${personal.name}`} description="That page doesn’t exist. Everything lives on the home page and one case study, so start there." path="404/" noindex>
+  <Nav home={false} />
+  <main id="main" class="notfound">
+    <div>
+      <p class="eyebrow">&gt; 404 not_found</p>
+      <h1 class="h2 h2--tight">That page doesn’t exist.</h1>
+      <p>The link may be old or mistyped. Everything lives on one page and one case study, so the home page is the best place to start.</p>
+      <a class="btn btn--primary" href={url('')}>Back to the portfolio</a>
+    </div>
+  </main>
+  <script>
+    import '../scripts/site.ts'
+  </script>
+</Base>

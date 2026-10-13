@@ -1,0 +1,42 @@
+---
+import Icon from './Icon.astro'
+import { personal } from '../lib/data'
+import { site } from '../site.config'
+import { url } from '../lib/url'
+
+// With a form service configured the form posts there (JavaScript upgrades it to an in-page submit);
+// otherwise it falls back to the visitor's email app.
+const action = site.formEndpoint || `mailto:${personal.email}`
+---
+<section class="section section--flush" id="contact" aria-labelledby="contact-h">
+  <div class="container">
+    <div class="card contact reveal">
+      <div class="contact__l">
+        <span class="eyebrow">04 · Contact</span>
+        <h2 class="h2 h2--tight" id="contact-h">Let’s talk.</h2>
+        <p class="intro-copy">{personal.contactIntro}</p>
+        <div class="actions">
+          <button class="btn btn--primary" type="button" data-copy={personal.email}><Icon name="copy" /> <span data-copy-label>Copy email</span></button>
+          <a class="btn" href={personal.linkedin} target="_blank" rel="noopener noreferrer"><Icon name="linkedin" /> Message on LinkedIn</a>
+          <a class="btn" href={url(personal.resumeFile)} download="Brennan_OHalloran_Resume.pdf" data-track="resume-download-contact"><Icon name="download" /> Download resume</a>
+        </div>
+        <span class="copy-live" role="status" aria-live="polite" data-copy-live></span>
+      </div>
+      <form class="contact__r form" action={action} method="POST" data-contact-form data-endpoint={site.formEndpoint} data-email={personal.email}>
+        <input type="hidden" name="_subject" value="Portfolio contact" />
+        <div class="form__row">
+          <div class="field"><label for="c-name">Your name</label><input id="c-name" name="name" autocomplete="name" placeholder="Jane Smith" required /></div>
+          <div class="field"><label for="c-email">Email address</label><input id="c-email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required /></div>
+        </div>
+        <div class="field">
+          <label for="c-msg">What would you like to say?</label>
+          <textarea id="c-msg" name="message" placeholder="A role, a question, a hello..." required minlength="10"></textarea>
+          <p class="field__hint">Sent securely to my inbox. If it doesn’t go through, you’ll get my email address instead.</p>
+        </div>
+        <div class="hp" aria-hidden="true"><label for="c-gotcha">Leave this field empty</label><input id="c-gotcha" name="_gotcha" tabindex="-1" autocomplete="off" /></div>
+        <div><button class="btn btn--primary" type="submit" data-submit>Send message <Icon name="arrow" /></button></div>
+        <div class="form__result" role="status" tabindex="-1" hidden data-result></div>
+      </form>
+    </div>
+  </div>
+</section>

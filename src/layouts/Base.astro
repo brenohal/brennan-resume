@@ -1,0 +1,59 @@
+---
+import '../styles/global.css'
+import '../styles/components.css'
+import themeInit from '../scripts/theme-init.js?raw'
+import interUrl from '../assets/fonts/inter-latin.woff2?url'
+import firaUrl from '../assets/fonts/fira-code-latin.woff2?url'
+import { site } from '../site.config'
+import { absolute, url } from '../lib/url'
+import { personal } from '../lib/data'
+
+interface Props {
+  title: string
+  description: string
+  path?: string          // path of this page under the site base, e.g. 'work/job-application-engine/'
+  noindex?: boolean
+  jsonLd?: object
+}
+const { title, description, path = '', noindex = false, jsonLd } = Astro.props
+const canonical = absolute(path)
+const ogImage = absolute('og-image.jpg')
+---
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={personal.name} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="theme-color" content="#0b1729" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f5f7fb" media="(prefers-color-scheme: light)" />
+    {!noindex && <link rel="canonical" href={canonical} />}
+    <link rel="icon" type="image/svg+xml" href={url('favicon.svg')} />
+    <link rel="preload" href={interUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={firaUrl} as="font" type="font/woff2" crossorigin />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${personal.name}: ${personal.headline}`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    <!-- Applied before first paint so there is never a flash of the wrong theme. Hash is pinned in astro.config.ts. -->
+    <script is:inline set:html={themeInit} />
+    {site.goatcounter && <script is:inline data-goatcounter={`https://${site.goatcounter}.goatcounter.com/count`} async src="https://gc.zgo.at/count.js"></script>}
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

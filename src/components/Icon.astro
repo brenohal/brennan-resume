@@ -1,0 +1,8 @@
+---
+import { strokeIcons, brandIcons, type IconName } from '../lib/icons'
+interface Props { name: IconName; class?: string }
+const { name, class: className = '' } = Astro.props
+const brand = name in brandIcons
+const paths = brand ? brandIcons[name as keyof typeof brandIcons] : strokeIcons[name as keyof typeof strokeIcons]
+---
+<svg class:list={['icon', { 'icon--fill': brand }, className]} viewBox="0 0 24 24" aria-hidden="true" focusable="false" set:html={paths} />

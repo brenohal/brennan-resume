@@ -1,0 +1,38 @@
+---
+import Icon from './Icon.astro'
+import { personal, sections } from '../lib/data'
+import { url } from '../lib/url'
+
+const { home = true } = Astro.props
+const prefix = home ? '' : url('')
+const nav = [
+  { label: 'Home', href: url(''), icon: 'terminal', num: '00' },
+  ...sections.map((s) => ({ label: s.label, href: `${prefix}#${s.id}`, icon: s.id === 'about' ? 'users' : s.id === 'work' ? 'briefcase' : s.id === 'projects' ? 'route' : 'mail', num: s.num })),
+  { label: 'Case study: Job Application Engine', href: url('work/job-application-engine/'), icon: 'eye', num: '' },
+] as const
+const actions = [
+  { label: 'Open résumé (PDF)', type: 'external', href: url(personal.resumeFile), icon: 'download' },
+  { label: 'Toggle light / dark theme', type: 'theme', icon: 'sun' },
+  { label: 'Copy email address', type: 'copy', icon: 'copy' },
+  { label: 'Open GitHub', type: 'external', href: personal.github, icon: 'github' },
+  { label: 'Open LinkedIn', type: 'external', href: personal.linkedin, icon: 'linkedin' },
+] as const
+---
+<dialog class="palette" id="palette" aria-label="Command palette" data-email={personal.email}>
+  <div class="palette__search">
+    <Icon name="command" />
+    <input type="text" placeholder="Type a command or search…" aria-label="Search commands" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="true" aria-controls="palette-list" data-palette-input />
+  </div>
+  <ul class="palette__list" id="palette-list" role="listbox" aria-label="Commands" data-palette-list>
+    <li class="palette__group" role="presentation">Navigation</li>
+    {nav.map((n) => (
+      <li role="presentation"><button type="button" class="palette__item" role="option" aria-selected="false" data-type="link" data-href={n.href}><Icon name={n.icon as any} />{n.label}{n.num && <span class="num">{n.num}</span>}</button></li>
+    ))}
+    <li class="palette__group" role="presentation">Actions</li>
+    {actions.map((a) => (
+      <li role="presentation"><button type="button" class="palette__item" role="option" aria-selected="false" data-type={a.type} data-href={'href' in a ? a.href : undefined}><Icon name={a.icon as any} />{a.label}</button></li>
+    ))}
+  </ul>
+  <p class="palette__empty" hidden data-palette-empty>No matching command</p>
+  <div class="palette__foot"><span><kbd>↑↓</kbd>navigate</span><span><kbd>↵</kbd>run</span><span><kbd>esc</kbd>close</span></div>
+</dialog>

@@ -1,0 +1,110 @@
+---
+import Base from '../../layouts/Base.astro'
+import Nav from '../../components/Nav.astro'
+import Icon from '../../components/Icon.astro'
+import Footer from '../../components/Footer.astro'
+import BottomBar from '../../components/BottomBar.astro'
+import Palette from '../../components/Palette.astro'
+import { caseStudy, personal } from '../../lib/data'
+import { url } from '../../lib/url'
+
+const flow = caseStudy.flow
+---
+<Base title={`${caseStudy.title} · Case study · ${personal.name}`} description={caseStudy.summary} path="work/job-application-engine/">
+  <Nav home={false} />
+  <main id="main" class="container page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href={url('')}>Home</a> / <a href={`${url('')}#projects`}>Projects</a> / Job Application Engine</nav>
+    <div class="mt-5"><span class="eyebrow">Case study · {caseStudy.eyebrow}</span></div>
+    <h1>{caseStudy.title}</h1>
+    <p class="lead">{caseStudy.summary}</p>
+    <div class="meta" aria-label="Project facts">
+      <div><b>Role</b><span>Sole builder</span></div><div><b>Built</b><span>Sep–Oct 2026</span></div><div><b>Stack</b><span>Node.js · TypeScript · React</span></div><div><b>Status</b><span>In active use</span></div>
+    </div>
+
+    <section class="page-sec"><h2>The problem</h2><p class="intro">{caseStudy.problem}</p></section>
+
+    <section class="page-sec"><h2>How the system fits together</h2>
+      <p class="intro">Five stages. The two highlighted ones are where most of my engineering went.</p>
+      <ol class="steps card card--pad steps--narrow">
+        {flow.map((s) => <li><b class:list={{ 'is-accent': s.accent }}>{s.title}</b><span>{s.detail}</span></li>)}
+      </ol>
+    </section>
+
+    <section class="page-sec"><h2>Routing that survives free-tier limits</h2>
+      <p class="intro">The router treats provider failure as normal. These rules come straight from the code’s own comments and commit history.</p>
+      <div class="cols-2">
+        <div>
+          <div class="table-wrap"><table class="data"><thead><tr><th>Signal</th><th>Response</th></tr></thead><tbody>
+            <tr><td><code class="mono">429</code> rate limited</td><td>Provider cools down until its <code class="mono">Retry-After</code>, or until midnight for daily caps</td></tr>
+            <tr><td><code class="mono">402</code> payment required</td><td>Provider retired for 24 hours</td></tr>
+            <tr><td><code class="mono">403</code> model refused</td><td>That model is benched alone; its provider keeps serving others</td></tr>
+          </tbody></table></div>
+          <p class="note mt-4"><b>Why it matters:</b> one failing model never takes a whole provider offline, and one exhausted provider never stalls a run.</p>
+        </div>
+        <div>
+          <p class="label">One request, step by step <span class="dim">(illustration)</span></p>
+          <ol class="seq">
+            <li><span>Request enters the router</span><code>route()</code></li>
+            <li><span>Cerebras answers</span><span class="state state--ok">200</span></li>
+            <li><span>Later: Groq returns a rate limit</span><span class="state state--wait">429</span></li>
+            <li><span>Groq cools down; OpenRouter takes over</span><span class="state state--ok">200</span></li>
+            <li><span>A DeepSeek model refuses; only that model is benched</span><span class="state state--bench">403</span></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-sec"><h2>Filling applications, with guard rails</h2>
+      <p class="intro">Automation that writes into other people’s forms has to be careful. The filler is built around not being wrong.</p>
+      <div class="cols-3">
+        <div class="card card--pad"><span class="eyebrow">Verified</span><h3 class="mt-4">Every write is checked</h3><p class="mt-3 small">Values are read back after being entered, so a field that silently rejected input is caught rather than assumed.</p></div>
+        <div class="card card--pad"><span class="eyebrow">Scoped</span><h3 class="mt-4">Only the right page</h3><p class="mt-3 small">Writes are bound to the page and document that own them, so a re-render mid-fill can’t send an answer to the wrong place.</p></div>
+        <div class="card card--pad"><span class="eyebrow">Honest</span><h3 class="mt-4">Never claims what isn’t true</h3><p class="mt-3 small">Answers carry their provenance, and personal facts are asked for rather than guessed (for example, it never claims you live near an office).</p></div>
+      </div>
+      <p class="note mt-5"><b>Human in the loop:</b> it fills every page up to the final Submit, then hands off. The last decision stays mine.</p>
+    </section>
+
+    <section class="page-sec"><h2>The phone dashboard</h2>
+      <div class="cols-2 cols--center">
+        <div>
+          <p class="intro">A Today view and push notifications mean the system comes to me: a form is ready, a reply arrived, new matches landed. The app’s own browser is reachable from the phone for the steps that need a human.</p>
+          <div class="chips"><span class="chip chip--accent">Today view</span><span class="chip">Push notifications</span><span class="chip">Quiet hours</span><span class="chip">Remote browser</span></div>
+        </div>
+        <div>
+          <div class="phone" role="img" aria-label="Illustration of the phone dashboard with placeholder entries">
+            <div class="phone__notch"></div><h4>Today</h4>
+            <div class="item item--hot"><b>Form ready to review</b><span>Company A · Role X</span></div>
+            <div class="item"><b>Reply received</b><span>Company B</span></div>
+            <div class="item"><b>New matches</b><span>3 roles scored</span></div>
+            <div class="item"><b>Health</b><span>All providers responding</span></div>
+          </div>
+          <p class="center-note">Illustrative UI with placeholder data</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-sec"><h2>What’s mine, and what isn’t</h2>
+      <p class="intro">Built on the open-source Career-Ops project (MIT licence). Being specific about the split is a strength, not a footnote.</p>
+      <div class="table-wrap"><table class="data"><thead><tr><th>Area</th><th>Source</th><th>Evidence</th></tr></thead><tbody>
+        <tr><td>LLM router &amp; provider registry</td><td class="ok">Mine</td><td>237 of 237 lines in the router, 169 of 169 in the registry (git blame)</td></tr>
+        <tr><td>Application filler &amp; guards (incl. Workday)</td><td class="ok">Mine</td><td>Most of the 163 commits, Sep 25–Oct 10 2026</td></tr>
+        <tr><td>Phone dashboard &amp; notifications</td><td class="ok">Mine</td><td>About 87% of the <code class="mono">app/</code> layer by line count</td></tr>
+        <tr><td>Job scanning &amp; evaluation foundation</td><td>Upstream</td><td>Career-Ops (MIT), credited on the page</td></tr>
+      </tbody></table></div>
+    </section>
+
+    <section class="page-sec">
+      <div class="card card--pad flex-between">
+        <div><h3>Want to see it run?</h3><p class="mt-3 small">The repository is private because it is in live use. I’m happy to walk through the code or a live demo on request.</p></div>
+        <a class="btn btn--primary" href={`mailto:${personal.email}?subject=${encodeURIComponent('Job Application Engine walkthrough')}`}><Icon name="mail" /> Request a walkthrough</a>
+      </div>
+      <p class="note mt-4"><b>Publishing note:</b> this page uses placeholder data only. Real screenshots would need sanitizing first (no job-board accounts, no personal answers, no session data).</p>
+    </section>
+  </main>
+  <Footer />
+  <BottomBar home={false} />
+  <Palette home={false} />
+  <script>
+    import '../../scripts/site.ts'
+  </script>
+</Base>
