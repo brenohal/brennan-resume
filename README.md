@@ -1,78 +1,116 @@
-# Brennan O'Halloran · portfolio (v2)
+# Brennan O'Halloran — Cybersecurity Portfolio
 
-A static, content-driven portfolio built with [Astro](https://astro.build). It ships pre-rendered HTML and about
-**3 KB of JavaScript**, under a strict Content-Security-Policy, with every page checked for accessibility on every push.
+[![Live portfolio](https://img.shields.io/badge/Live%20portfolio-brenohal.github.io-111827?style=flat-square&logo=googlechrome&logoColor=white)](https://brenohal.github.io/brennan-resume/)
+[![CI](https://github.com/brenohal/brennan-resume/actions/workflows/ci.yml/badge.svg)](https://github.com/brenohal/brennan-resume/actions/workflows/ci.yml)
+[![Built with Astro](https://img.shields.io/badge/Built%20with-Astro-ff5d01?style=flat-square&logo=astro&logoColor=white)](https://astro.build/)
 
-Live: <https://brenohal.github.io/brennan-resume/>
+<table>
+  <tr>
+    <td width="190" align="center"><img src="src/assets/images/portrait.jpg" width="160" alt="Portrait of Brennan O'Halloran" /></td>
+    <td>
+      <h2>Security operations, automation &amp; cyber risk</h2>
+      <p>Internal SOC Analyst at Henry Schein and Florida State University IT graduate, <em>magna cum laude</em>. I build practical security workflows and make risk easier to act on.</p>
+      <p><a href="https://brenohal.github.io/brennan-resume/">Portfolio</a> · <a href="https://brenohal.github.io/brennan-resume/resume/">Résumé</a> · <a href="mailto:Brennan.ohal1@gmail.com">Email</a> · <a href="https://www.linkedin.com/in/brennan-o-halloran">LinkedIn</a></p>
+    </td>
+  </tr>
+</table>
 
-## Commands
+| **14%** | **4** | **3.86** |
+|:---:|:---:|:---:|
+| fewer global firewall rules | roles at Henry Schein | GPA · Magna Cum Laude |
 
-| Command | What it does |
-|---|---|
-| `npm install` | Install dependencies |
-| `npm run dev` | Dev server with hot reload (no CSP in dev, by design) |
-| `npm run build` | Type-check, generate the share image, build the site, then run the **dist quality gate** |
-| `npm run preview` | Serve the production build at `http://localhost:4321/brennan-resume/` |
-| `npm test` | Playwright: accessibility (axe) on every page in both themes, plus behavior tests, desktop and phone |
-| `npm run lint` | oxlint |
-| `npm run deploy` | Build and publish `dist/` to the `gh-pages` branch (manual, on purpose) |
+## What I work on
 
-First time running tests locally: they reuse your installed Chrome. In CI they install Chromium.
+- Investigating security cases with Torq and SentinelOne
+- Automating firewall-rule analysis with Python and Palo Alto Panorama
+- Building threat-intelligence and SOAR workflows for zero-day response
+- Translating cyber exposure into business terms with the FAIR model
 
-## Editing content
+My experience spans GSOC operations, firewall management, secure software testing, and executive risk communication. The portfolio also includes coursework in web development, databases, and systems programming.
 
-Nothing is hard-coded in components. Content lives in typed, build-validated files, so a typo fails the build instead of shipping.
+## What this project demonstrates
 
-| What | Where |
-|---|---|
-| Name, status, bio, contact copy, hero "impact log" | `src/data/personal.json` |
-| Jobs (dates are `YYYY-MM`; every job needs a `headline` outcome) | `src/content/experience.json` |
-| Coursework projects | `src/content/projects.json` |
-| Flagship project and case-study page | `src/data/caseStudy.json` (+ `src/pages/work/job-application-engine.astro`) |
-| Metrics band, credentials, toolbox, involvement | `src/content/*.json` |
-| Education | `src/data/education.json` |
-| **Résumé PDF** | `public/assets/resume.pdf` (replace the file; keep the name) |
+- A fast, static site generated with [Astro](https://astro.build/)
+- Content-driven pages backed by typed, build-validated JSON data
+- Responsive layouts with light and dark themes
+- Accessible interactions tested with Playwright and axe-core
+- A strict Content Security Policy and self-hosted fonts
+- Generated metadata, sitemap, canonical URLs, and Open Graph imagery
+- GitHub Pages deployment with automated CI quality gates
 
-The schemas are in `src/content.config.ts`.
+## Selected projects
 
-## One file controls where the site lives: `src/site.config.ts`
+### AI-Driven Job Application Engine
 
-```ts
-const customDomain = ''           // e.g. 'brennan.example.com'
-formEndpoint: '...formspree...'   // contact form service ('' = open the visitor's email app)
-goatcounter: 'brenohal'           // cookie-free analytics ('' = none)
+An active personal build that ranks roles, tailors résumé content, and fills multi-page application forms up to the final review. Its LLM router handles provider rate limits and failover; safety checks verify each form entry and keep submission in my hands.
+
+The code is in a private repository, but the [public case study](https://brenohal.github.io/brennan-resume/work/job-application-engine/) walks through the design, safeguards, and workflow.
+
+### Project snapshots
+
+|  |  |
+|:---:|:---:|
+| [![Java CRUD web application preview](src/assets/images/webapp-poster.jpg)](https://github.com/brenohal/web-application-development-java)<br>**[Dynamic CRUD Web Application](https://github.com/brenohal/web-application-development-java)**<br>Java · MySQL · server-side validation | [![Mobile business card preview](src/assets/images/business-card-poster.jpg)](https://github.com/brenohal/mobile-web-application-development)<br>**[Interactive Mobile Business Card](https://github.com/brenohal/mobile-web-application-development)**<br>PHP · JavaScript · mobile-first design |
+| [![Data warehouse project preview](src/assets/images/data-warehouse.png)](https://github.com/brenohal/advanced-database-design-sql)<br>**[Advanced Database Design](https://github.com/brenohal/advanced-database-design-sql)**<br>T-SQL · normalization · data warehousing | ![Cruise booking system preview](src/assets/images/cruise-booking.png)<br>**Spudwegian Cruise Booking System**<br>C++ · file I/O · input validation |
+
+## Tech stack
+
+`Astro` · `TypeScript` · `JavaScript` · `HTML` · `CSS` · `Playwright` · `axe-core` · `GitHub Actions` · `GitHub Pages`
+
+## Run it locally
+
+This project requires Node.js `22.12+`.
+
+```bash
+git clone https://github.com/brenohal/brennan-resume.git
+cd brennan-resume
+npm install
+npm run dev
 ```
 
-Change a value and the base path, canonical/OG tags, sitemap, CSP, footer privacy line, and share image all follow.
+Then open the local URL printed by Astro.
 
-**Using a custom domain**
-1. Set `customDomain`, and add a `public/CNAME` file containing the domain (the build fails if it is missing).
-2. At your DNS provider, point the domain to GitHub Pages (`A` records `185.199.108.153`, `.109.153`, `.110.153`, `.111.153`, or a `CNAME` for a subdomain).
-3. In the repo's Pages settings set the custom domain and enable "Enforce HTTPS".
-4. `npm run deploy`.
+## Useful commands
 
-## What is generated at build time
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the local development server |
+| `npm run build` | Type-check, generate assets, build the site, and run the output quality gate |
+| `npm run preview` | Preview the production build locally |
+| `npm run check` | Run Astro's type and content checks |
+| `npm run lint` | Run oxlint |
+| `npm test` | Run accessibility and behavior tests in desktop and mobile viewports |
+| `npm run deploy` | Publish `dist/` to the `gh-pages` branch manually |
 
-- **Share image** (`og-image.jpg`) is drawn from the site's own data by `scripts/make-og.mjs` (satori), so it cannot drift from the content.
-- **Structured data (JSON-LD)**, **sitemap**, and **canonical URLs** are derived from the same data and config.
-- **Optimized images** (AVIF/WebP at the sizes used) come from `src/assets/images`.
+## Where to edit content
 
-## Quality gates
+Most portfolio content is data-driven, so updates usually do not require editing components.
 
-`npm run build` ends with `scripts/check-dist.mjs`, which **fails the build** if the output breaks a promise:
-strict CSP (no `unsafe-inline`/`unsafe-eval`), no inline `<style>`/`style=`/`on*=`, no unexpected third-party origins,
-every internal link resolves, one `<h1>`, alt text on images, complete metadata, size budgets (JS ≤ 30 KB, CSS ≤ 25 KB gzipped).
+| Content | File |
+| --- | --- |
+| Name, headline, bio, contact links, and impact metrics | `src/data/personal.json` |
+| Work history | `src/content/experience.json` |
+| Projects | `src/content/projects.json` |
+| Education | `src/data/education.json` |
+| Flagship case study | `src/data/caseStudy.json` |
+| Résumé PDF | `public/assets/resume.pdf` |
+| Site URL, form endpoint, and analytics | `src/site.config.ts` |
 
-CI (`.github/workflows/ci.yml`) runs lint, build + gate, a production dependency audit, and the full browser suite.
-Actions are pinned to commit SHAs and the workflow token is read-only.
+The schemas are defined in `src/content.config.ts`, so invalid content is caught during the build.
 
-## Security notes
+## Quality and security
 
-- **Content-Security-Policy** is injected by Astro with computed hashes. The one inline script (theme, applied before first paint)
-  is `src/scripts/theme-init.js`; its hash is derived from that file in `astro.config.ts`.
-- **No third-party requests** except the optional analytics and form service named in `site.config.ts`. Fonts are self-hosted.
-- GitHub Pages cannot send HTTP headers, so `frame-ancestors`, HSTS and similar need a different host if ever required.
+`npm run build` ends with a custom output check that verifies the generated site for:
 
-## Rollback
+- A strict CSP without `unsafe-inline` or `unsafe-eval`
+- Unexpected third-party origins
+- Broken internal links
+- Missing image alt text and page metadata
+- One page-level `<h1>` per page
+- JavaScript and CSS size budgets
 
-The previous (React) site is tagged `v1-final`. To restore it: check out that tag, `npm ci && npm run deploy`.
+The CI workflow also runs linting, the production build, a production dependency audit, and the complete browser test suite. GitHub Actions is configured with read-only repository permissions and pinned action commits.
+
+## License
+
+This is a personal portfolio. The source is public for reference, but the content, résumé, branding, and media are not licensed for reuse.
